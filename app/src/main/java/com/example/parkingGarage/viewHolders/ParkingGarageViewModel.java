@@ -23,7 +23,8 @@ public class ParkingGarageViewModel extends AndroidViewModel {
         return repository.getAllLogsByUserIdLiveData(userId);
     }
 
-    public void insert(ParkingGarage log){
-        repository.insertUser(log);
-    }
+//    @Deprecated
+//    public void insert(ParkingGarage log){
+//        repository.insertUser(log);
+//    }
 }
