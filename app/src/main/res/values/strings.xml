@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Virtual Parking Garage</string>
-    <string name="exercise">Exercise</string>
-    <string name="enter_an_exercise">Enter an Exercise</string>
-    <string name="weight">Weight</string>
-    <string name="enter_a_weight">Enter a Weight</string>
-    <string name="enter_reps">Enter Reps</string>
-    <string name="reps">Reps</string>
+    <string name="exercise">Garage</string>
+    <string name="enter_an_exercise">Enter your Parking Garage ID</string>
+    <string name="weight">Floor</string>
+    <string name="enter_a_weight">Enter which floor you\'re on</string>
+    <string name="enter_reps">Enter Parking Spot</string>
+    <string name="reps">Spot</string>
     <string name="log">Log!</string>
     <string name="nothing_to_show_time_to_hit_the_gym">Nothing to show, time to hit the gym!</string>
     <string name="welcome_to_the_virtual_parking_garage_nplease_sign_in">Welcome To the Virtual Parking Garage.\nPlease Sign In.</string>

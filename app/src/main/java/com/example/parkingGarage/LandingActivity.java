@@ -73,8 +73,23 @@ public class LandingActivity extends AppCompatActivity {
             Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext());
             startActivity(intent);
         }
+        else{
+            LiveData<Boolean> userObserver = repository.getAdminStatus(loggedInUserId);
+            userObserver.observe(this, adminStatus -> {
+                if(adminStatus){
+                    binding.adminAreaButton.setVisibility(View.VISIBLE);
+                }
+                else{
+                    binding.adminAreaButton.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+
+
 
         updateSharedPreference();
+
+
 
 
         binding.logButton.setOnClickListener(new View.OnClickListener(){
@@ -178,6 +193,7 @@ public class LandingActivity extends AppCompatActivity {
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
         sharedPrefEditor.apply();
+
     }
 
 

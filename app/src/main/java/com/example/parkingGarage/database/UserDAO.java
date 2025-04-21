@@ -29,4 +29,8 @@ public interface UserDAO {
 
     @Query("SELECT * FROM " + GymLogDatabase.USER_TABLE + " WHERE id == :userId")
     LiveData<User> getUserByUserId(int userId);
+
+    @Query("SELECT isAdmin FROM " + GymLogDatabase.USER_TABLE + " WHERE id == :userId")
+    LiveData<Boolean> getAdminStatus(int userId);
+
 }

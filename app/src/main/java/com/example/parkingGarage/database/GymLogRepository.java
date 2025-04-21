@@ -87,6 +87,9 @@ public class GymLogRepository {
     public LiveData<User> getUserByUserId(int userId) {
         return userDAO.getUserByUserId(userId);
     }
+    public LiveData<Boolean> getAdminStatus(int userId) {
+        return userDAO.getAdminStatus(userId);
+    }
 
     public LiveData<List<ParkingGarage>> getAllLogsByUserIdLiveData(int loggedInUserId){
         return gymLogDAO.getRecordsetUserIdLiveData(loggedInUserId);

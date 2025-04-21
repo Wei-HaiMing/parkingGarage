@@ -28,10 +28,10 @@ public class ParkingGarage {
 
     @Override
     public String toString() {
-        return  exercise + '\n' +
-                "weight: " + weight + '\n' +
-                "reps=" + reps + '\n' +
-                "date=" + date.toString() + '\n' +
+        return  "garage: " + exercise + '\n' +
+                "floor: " + weight + '\n' +
+                "spot" + reps + '\n' +
+                '\n' +
                 "=-=-=--=-=-=\n";
     }
 
