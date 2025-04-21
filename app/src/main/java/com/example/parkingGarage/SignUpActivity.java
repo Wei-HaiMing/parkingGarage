@@ -1,0 +1,87 @@
+package com.example.parkingGarage;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+
+import com.example.parkingGarage.database.GymLogRepository;
+import com.example.parkingGarage.database.entities.User;
+import com.example.parkingGarage.databinding.ActivitySignUpBinding;
+
+
+public class SignUpActivity extends AppCompatActivity {
+
+    private ActivitySignUpBinding binding;
+
+    private GymLogRepository repository;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivitySignUpBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        repository = GymLogRepository.getRepository(getApplication());
+
+
+
+        binding.signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                verifyUser();
+            }
+        });
+
+        binding.signUpBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void verifyUser(){
+        //todo add checks to validate all fields, have a query add user to the database and have Alert Dialog
+        // show success and go back to MainActivity or show failure, what failuere, and do nothing.
+//        String username = binding.userNameLoginEditText.getText().toString();
+//        if(username.isEmpty()){
+//            toastMaker("Username should not be blank");
+//            return;
+//        }
+//        LiveData<User> userObserver = repository.getUserByUserName(username);
+//        userObserver.observe(this, user -> {
+//            if(user != null){
+//                String password = binding.passwordLoginEditText.getText().toString();
+//                if(password.equals(user.getPassword())){
+//                    startActivity(LandingActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+//                } else {
+//                    toastMaker("Invalid password");
+//                    binding.passwordLoginEditText.setSelection(0);
+//                }
+//            }else{
+//                toastMaker(String.format("%s is not a valid username.", username));
+//                binding.userNameLoginEditText.setSelection(0);
+//            }
+//        });
+    }
+
+    private void uploadUserToDatabase(){
+        //todo Upload the valid user data to the database. Use repository command and add functions. Use DAO and add functions
+    }
+
+    private void toastMaker(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    static Intent loginIntentFactory(Context context){
+        return new Intent(context, SignUpActivity.class);
+    }
+}
