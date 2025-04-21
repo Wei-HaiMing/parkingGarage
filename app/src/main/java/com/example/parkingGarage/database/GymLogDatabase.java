@@ -10,8 +10,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.parkingGarage.database.entities.GymLog;
-import com.example.parkingGarage.MainActivity;
+import com.example.parkingGarage.database.entities.ParkingGarage;
+import com.example.parkingGarage.LandingActivity;
 import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.database.typeConverters.LocalDateTypeConverter;
 
@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {GymLog.class, User.class}, version = 4, exportSchema = false)
+@Database(entities = {ParkingGarage.class, User.class}, version = 4, exportSchema = false)
 public abstract class GymLogDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
@@ -51,7 +51,7 @@ public abstract class GymLogDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
-            Log.i(MainActivity.TAG, "DATABASE CREATED!");
+            Log.i(LandingActivity.TAG, "DATABASE CREATED!");
             databaseWriteExecutor.execute(() -> {
                 UserDAO dao = INSTANCE.userDAO();
                 dao.deleteAll();

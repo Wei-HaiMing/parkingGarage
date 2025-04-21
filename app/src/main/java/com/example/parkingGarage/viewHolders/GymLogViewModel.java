@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.parkingGarage.database.GymLogRepository;
-import com.example.parkingGarage.database.entities.GymLog;
+import com.example.parkingGarage.database.entities.ParkingGarage;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ public class GymLogViewModel extends AndroidViewModel {
         repository = GymLogRepository.getRepository(application);
     }
 
-    public LiveData<List<GymLog>> getAllLogsById(int userId) {
+    public LiveData<List<ParkingGarage>> getAllLogsById(int userId) {
         return repository.getAllLogsByUserIdLiveData(userId);
     }
 
-    public void insert(GymLog log){
+    public void insert(ParkingGarage log){
         repository.insertGymLog(log);
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity(tableName = GymLogDatabase.GYM_LOG_TABLE)
-public class GymLog {
+public class ParkingGarage {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String exercise;
@@ -18,7 +18,7 @@ public class GymLog {
     private LocalDateTime date;
     private int userId;
 
-    public GymLog(String exercise, double weight, int reps, int userId) {
+    public ParkingGarage(String exercise, double weight, int reps, int userId) {
         this.exercise = exercise;
         this.weight = weight;
         this.reps = reps;
@@ -39,8 +39,8 @@ public class GymLog {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GymLog gymLog = (GymLog) o;
-        return id == gymLog.id && Double.compare(weight, gymLog.weight) == 0 && reps == gymLog.reps && userId == gymLog.userId && Objects.equals(exercise, gymLog.exercise) && Objects.equals(date, gymLog.date);
+        ParkingGarage parkingGarage = (ParkingGarage) o;
+        return id == parkingGarage.id && Double.compare(weight, parkingGarage.weight) == 0 && reps == parkingGarage.reps && userId == parkingGarage.userId && Objects.equals(exercise, parkingGarage.exercise) && Objects.equals(date, parkingGarage.date);
     }
 
     @Override

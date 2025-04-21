@@ -6,24 +6,24 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.parkingGarage.database.entities.GymLog;
+import com.example.parkingGarage.database.entities.ParkingGarage;
 
 
 import java.util.List;
 @Dao
 public interface GymLogDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(GymLog gymlog);
+    void insert(ParkingGarage gymlog);
 
     @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " ORDER BY date DESC")
-    List<GymLog> getAllRecords();
+    List<ParkingGarage> getAllRecords();
 
     @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " WHERE userId = :userId ORDER BY date DESC")
-    LiveData<List<GymLog>> getAllLogsByUserId(int userId);
+    LiveData<List<ParkingGarage>> getAllLogsByUserId(int userId);
 
     @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
-    List<GymLog> getRecordsetUserId(int loggedInUserId);
+    List<ParkingGarage> getRecordsetUserId(int loggedInUserId);
 
     @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
-    LiveData<List<GymLog>> getRecordsetUserIdLiveData(int loggedInUserId);
+    LiveData<List<ParkingGarage>> getRecordsetUserIdLiveData(int loggedInUserId);
 }

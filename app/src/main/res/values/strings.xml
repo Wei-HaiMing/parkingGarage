@@ -12,6 +12,6 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login!</string>
-    <string name="preference_file_key">armandoPreferenceFileNameGymLog</string>
-    <string name="preference_userId_key">armandoPreferenceUserIdKeyGymLog</string>
+    <string name="preference_file_key">uwuPreferenceFileNameParkingGarage</string>
+    <string name="preference_userId_key">uwuPreferenceUserIdKeyParkingGarage</string>
 </resources>
