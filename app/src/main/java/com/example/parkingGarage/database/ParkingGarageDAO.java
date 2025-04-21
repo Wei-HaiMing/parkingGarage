@@ -11,19 +11,19 @@ import com.example.parkingGarage.database.entities.ParkingGarage;
 
 import java.util.List;
 @Dao
-public interface GymLogDAO {
+public interface ParkingGarageDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(ParkingGarage gymlog);
+    void insert(ParkingGarage parkingLog);
 
-    @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " ORDER BY date DESC")
+    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " ORDER BY date DESC")
     List<ParkingGarage> getAllRecords();
 
-    @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " WHERE userId = :userId ORDER BY date DESC")
+    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :userId ORDER BY date DESC")
     LiveData<List<ParkingGarage>> getAllLogsByUserId(int userId);
 
-    @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
+    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
     List<ParkingGarage> getRecordsetUserId(int loggedInUserId);
 
-    @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
+    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
     LiveData<List<ParkingGarage>> getRecordsetUserIdLiveData(int loggedInUserId);
 }

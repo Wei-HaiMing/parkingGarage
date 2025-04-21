@@ -18,12 +18,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.parkingGarage.database.GymLogRepository;
+import com.example.parkingGarage.database.ParkingGarageRepository;
 import com.example.parkingGarage.database.entities.ParkingGarage;
 import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.databinding.ActivityLandingBinding;
-import com.example.parkingGarage.viewHolders.GymLogAdapter;
-import com.example.parkingGarage.viewHolders.GymLogViewModel;
+import com.example.parkingGarage.viewHolders.ParkingGarageAdapter;
+import com.example.parkingGarage.viewHolders.ParkingGarageViewModel;
 
 import java.util.ArrayList;
 
@@ -34,9 +34,9 @@ public class LandingActivity extends AppCompatActivity {
 
     private static final int LOGGED_OUT = -1;
     private ActivityLandingBinding binding;
-    private GymLogRepository repository;
+    private ParkingGarageRepository repository;
 
-    private GymLogViewModel gymLogViewModel;
+    private ParkingGarageViewModel parkingGarageViewModel;
 
     public static final String TAG = "DAC_GYMLOG";
     String mExercise = "";
@@ -53,18 +53,18 @@ public class LandingActivity extends AppCompatActivity {
         binding = com.example.parkingGarage.databinding.ActivityLandingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        gymLogViewModel = new ViewModelProvider(this).get(GymLogViewModel.class);
+        parkingGarageViewModel = new ViewModelProvider(this).get(ParkingGarageViewModel.class);
 
 
         RecyclerView recyclerView = binding.logDisplayRecyclerView;
-        final GymLogAdapter adapter = new GymLogAdapter(new GymLogAdapter.GymLogDiff());
+        final ParkingGarageAdapter adapter = new ParkingGarageAdapter(new ParkingGarageAdapter.ParkingGarageDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        repository = GymLogRepository.getRepository(getApplication());
+        repository = ParkingGarageRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-        gymLogViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
+        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
             adapter.submitList(gymLogs);
         });
 
@@ -208,7 +208,7 @@ public class LandingActivity extends AppCompatActivity {
             return;
         }
         ParkingGarage log = new ParkingGarage(mExercise, mWeight, mReps, loggedInUserId);
-        repository.insertGymLog(log);
+        repository.insertParkingLog(log);
     }
 
     @Deprecated
