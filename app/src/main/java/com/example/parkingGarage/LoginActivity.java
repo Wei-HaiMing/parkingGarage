@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.parkingGarage.database.GymLogRepository;
+import com.example.parkingGarage.database.ParkingGarageRepository;
 import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.databinding.ActivityLoginBinding;
 
@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
 
-    private GymLogRepository repository;
+    private ParkingGarageRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = GymLogRepository.getRepository(getApplication());
+        repository = ParkingGarageRepository.getRepository(getApplication());
 
 
 

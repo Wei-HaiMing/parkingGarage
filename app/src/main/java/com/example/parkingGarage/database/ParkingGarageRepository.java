@@ -15,66 +15,67 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class GymLogRepository {
-    private GymLogDAO gymLogDAO;
+public class ParkingGarageRepository {
+    private ParkingGarageDAO parkingGarageDAO;
     private final UserDAO userDAO;
     private ArrayList<ParkingGarage> allLogs;
 
-    private static GymLogRepository repository;
+    private static ParkingGarageRepository repository;
 
-    private GymLogRepository(Application application){
-        GymLogDatabase db = GymLogDatabase.getDatabase(application);
-        this.gymLogDAO = db.gymLogDAO();
+    private ParkingGarageRepository(Application application){
+        ParkingGarageDatabase db = ParkingGarageDatabase.getDatabase(application);
+        this.parkingGarageDAO = db.parkingLotDAO();
         this.userDAO = db.userDAO();
-        this.allLogs = (ArrayList<ParkingGarage>) this.gymLogDAO.getAllRecords();
+        this.allLogs = (ArrayList<ParkingGarage>) this.parkingGarageDAO.getAllRecords();
     }
 
-    public static GymLogRepository getRepository(Application application){
+    public static ParkingGarageRepository getRepository(Application application){
         if(repository != null){
             return repository;
         }
-        Future<GymLogRepository> future = GymLogDatabase.databaseWriteExecutor.submit(
-                new Callable<GymLogRepository>() {
+        Future<ParkingGarageRepository> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+                new Callable<ParkingGarageRepository>() {
                     @Override
-                    public GymLogRepository call() throws Exception {
-                        return new GymLogRepository(application);
+                    public ParkingGarageRepository call() throws Exception {
+                        return new ParkingGarageRepository(application);
                     }
                 }
         );
         try{
             return future.get();
         }catch(InterruptedException | ExecutionException e){
-            Log.d(LandingActivity.TAG, "Problem getting GymLogRepository, thread error.");
+            Log.d(LandingActivity.TAG, "Problem getting ParkingGarageRepository, thread error.");
         }
         return null;
     }
 
     public ArrayList<ParkingGarage> getAllLogs(){
-        Future<ArrayList<ParkingGarage>> future = GymLogDatabase.databaseWriteExecutor.submit(
+        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<ParkingGarage>>() {
                     @Override
                     public ArrayList<ParkingGarage> call() throws Exception {
-                        return (ArrayList<ParkingGarage>) gymLogDAO.getAllRecords();
+                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getAllRecords();
                     }
                 }
         );
         try{
             return future.get();
         }catch(InterruptedException | ExecutionException e){
-            Log.i(LandingActivity.TAG, "Problem when getting all GymLogs in the repository");
+            Log.i(LandingActivity.TAG, "Problem when getting all ParkingGarageLog in the repository");
         }
         return null;
     }
 
-    public void insertGymLog(ParkingGarage parkingGarage){
-        GymLogDatabase.databaseWriteExecutor.execute(() ->
+    public void insertParkingLog(ParkingGarage parkingGarage){
+        ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
         {
-            gymLogDAO.insert(parkingGarage);
+            parkingGarageDAO.insert(parkingGarage);
         });
     }
 
+    @Deprecated
     public void insertUser(User... user){
-        GymLogDatabase.databaseWriteExecutor.execute(() ->
+        ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
         {
             userDAO.insert(user);
         });
@@ -92,22 +93,22 @@ public class GymLogRepository {
     }
 
     public LiveData<List<ParkingGarage>> getAllLogsByUserIdLiveData(int loggedInUserId){
-        return gymLogDAO.getRecordsetUserIdLiveData(loggedInUserId);
+        return parkingGarageDAO.getRecordsetUserIdLiveData(loggedInUserId);
     }
     @Deprecated
     public ArrayList<ParkingGarage> getAllLogsByUserId(int loggedInUserId) {
-        Future<ArrayList<ParkingGarage>> future = GymLogDatabase.databaseWriteExecutor.submit(
+        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<ParkingGarage>>() {
                     @Override
                     public ArrayList<ParkingGarage> call() throws Exception {
-                        return (ArrayList<ParkingGarage>) gymLogDAO.getRecordsetUserId(loggedInUserId);
+                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getRecordsetUserId(loggedInUserId);
                     }
                 }
         );
         try{
             return future.get();
         }catch(InterruptedException | ExecutionException e){
-            Log.i(LandingActivity.TAG, "Problem when getting all GymLogs in the repository");
+            Log.i(LandingActivity.TAG, "Problem when getting all ParkingLogs in the repository");
         }
         return null;
     }

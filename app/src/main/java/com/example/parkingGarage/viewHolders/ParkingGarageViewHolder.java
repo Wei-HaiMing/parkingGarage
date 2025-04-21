@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkingGarage.R;
 
-public class GymLogViewHolder extends RecyclerView.ViewHolder {
+public class ParkingGarageViewHolder extends RecyclerView.ViewHolder {
     private final TextView gymLogViewItem;
-    private GymLogViewHolder(View gymLogView){
+    private ParkingGarageViewHolder(View gymLogView){
         super(gymLogView);
         gymLogViewItem = gymLogView.findViewById(R.id.recyclerItemTextview);
     }
@@ -20,9 +20,9 @@ public class GymLogViewHolder extends RecyclerView.ViewHolder {
         gymLogViewItem.setText(text);
     }
 
-    static GymLogViewHolder create(ViewGroup parent){
+    static ParkingGarageViewHolder create(ViewGroup parent){
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.parkinggarage_recycler_item, parent, false);
-        return new GymLogViewHolder(view);
+        return new ParkingGarageViewHolder(view);
     }
 }

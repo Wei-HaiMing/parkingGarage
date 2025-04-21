@@ -8,24 +8,24 @@ import androidx.recyclerview.widget.ListAdapter;
 
 import com.example.parkingGarage.database.entities.ParkingGarage;
 
-public class GymLogAdapter extends ListAdapter<ParkingGarage, GymLogViewHolder> {
-    public GymLogAdapter(@NonNull DiffUtil.ItemCallback<ParkingGarage> diffCallBack){
+public class ParkingGarageAdapter extends ListAdapter<ParkingGarage, ParkingGarageViewHolder> {
+    public ParkingGarageAdapter(@NonNull DiffUtil.ItemCallback<ParkingGarage> diffCallBack){
         super(diffCallBack);
     }
 
     @NonNull
     @Override
-    public GymLogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        return GymLogViewHolder.create(parent);
+    public ParkingGarageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+        return ParkingGarageViewHolder.create(parent);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GymLogViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ParkingGarageViewHolder holder, int position) {
         ParkingGarage current = getItem(position);
         holder.bind(current.toString());
     }
 
-    public static class GymLogDiff extends DiffUtil.ItemCallback<ParkingGarage>{
+    public static class ParkingGarageDiff extends DiffUtil.ItemCallback<ParkingGarage>{
         @Override
         public boolean areItemsTheSame(@NonNull ParkingGarage oldItem, @NonNull ParkingGarage newItem) {
             return oldItem == newItem;

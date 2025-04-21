@@ -5,18 +5,18 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.parkingGarage.database.GymLogRepository;
+import com.example.parkingGarage.database.ParkingGarageRepository;
 import com.example.parkingGarage.database.entities.ParkingGarage;
 
 import java.util.List;
 
-public class GymLogViewModel extends AndroidViewModel {
-    private final GymLogRepository repository;
+public class ParkingGarageViewModel extends AndroidViewModel {
+    private final ParkingGarageRepository repository;
 
 
-    public GymLogViewModel(Application application){
+    public ParkingGarageViewModel(Application application){
         super(application);
-        repository = GymLogRepository.getRepository(application);
+        repository = ParkingGarageRepository.getRepository(application);
     }
 
     public LiveData<List<ParkingGarage>> getAllLogsById(int userId) {
@@ -24,6 +24,6 @@ public class GymLogViewModel extends AndroidViewModel {
     }
 
     public void insert(ParkingGarage log){
-        repository.insertGymLog(log);
+        repository.insertUser(log);
     }
 }
