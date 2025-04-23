@@ -51,6 +51,32 @@ public class SignUpActivity extends AppCompatActivity {
     private void verifyUser(){
         //todo add checks to validate all fields, have a query add user to the database and have Alert Dialog
         // show success and go back to MainActivity or show failure, what failuere, and do nothing.
+
+
+        String username = binding.signUpUserNameEditText.getText().toString();
+        String email = binding.signUpEmailEditText.getText().toString();
+        String password = binding.signUpPasswordEditText.getText().toString();
+        String confirmPassword = binding.signUpConfirmPasswordEditText.getText().toString();
+
+        if(username.length() < 2){
+            toastMaker("Username too small, please extend it.");
+            return;
+        }
+
+        if(!email.contains("@")){
+            toastMaker("Email has no service provider, please add it.");
+            return;
+        }
+
+        if(!password.equals(confirmPassword)){
+            toastMaker("The passwords do not match, please rewrite it.");
+            return;
+        }
+
+        toastMaker("Hello " + username + "! Sign in to get Started!");
+        uploadUserToDatabase(username, password, email);
+
+
 //        String username = binding.userNameLoginEditText.getText().toString();
 //        if(username.isEmpty()){
 //            toastMaker("Username should not be blank");
@@ -73,15 +99,16 @@ public class SignUpActivity extends AppCompatActivity {
 //        });
     }
 
-    private void uploadUserToDatabase(){
+    private void uploadUserToDatabase(String username, String password, String email){
         //todo Upload the valid user data to the database. Use repository command and add functions. Use DAO and add functions
+        repository.insertUser(username, password, email);
     }
 
     private void toastMaker(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    static Intent loginIntentFactory(Context context){
+    static Intent signUpIntentFactory(Context context){
         return new Intent(context, SignUpActivity.class);
     }
 }

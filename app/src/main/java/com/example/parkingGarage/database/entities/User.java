@@ -13,11 +13,15 @@ public class User {
     private int id;
     private String username;
     private String password;
+
+
     private boolean isAdmin;
 
     public User(String username, String password) {
+        //todo, add email as a field, as a parameter, and update the field. also fix the code :3
         this.username = username;
         this.password = password;
+
         isAdmin = false;
     }
 
@@ -64,5 +68,13 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
