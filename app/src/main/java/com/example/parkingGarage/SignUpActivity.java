@@ -9,7 +9,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.parkingGarage.database.GymLogRepository;
+
+import com.example.parkingGarage.database.ParkingGarageRepository;
 import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.databinding.ActivitySignUpBinding;
 
@@ -18,7 +19,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
 
-    private GymLogRepository repository;
+    private ParkingGarageRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = GymLogRepository.getRepository(getApplication());
+        repository = ParkingGarageRepository.getRepository(getApplication());
 
 
 
@@ -102,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void uploadUserToDatabase(String username, String password, String email){
         //todo Upload the valid user data to the database. Use repository command and add functions. Use DAO and add functions
         repository.insertUser(username, password, email);
+
     }
 
     private void toastMaker(String message) {
