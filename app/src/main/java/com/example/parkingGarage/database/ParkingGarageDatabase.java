@@ -20,22 +20,22 @@ import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {ParkingGarage.class, User.class}, version = 4, exportSchema = false)
-public abstract class GymLogDatabase extends RoomDatabase {
+public abstract class ParkingGarageDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "GymLogDatabase";
-    public static final String GYM_LOG_TABLE = "gymLogTable";
+    public static final String PARKING_LOG_TABLE = "parkingLogTable";
 
-    private static volatile GymLogDatabase INSTANCE;
+    private static volatile ParkingGarageDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-    static GymLogDatabase getDatabase(final Context context){
+    static ParkingGarageDatabase getDatabase(final Context context){
         if(INSTANCE == null){
-            synchronized (GymLogDatabase.class){
+            synchronized (ParkingGarageDatabase.class){
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
-                            GymLogDatabase.class,
+                            ParkingGarageDatabase.class,
                                     DATABASE_NAME
                             )
                             .fallbackToDestructiveMigration()
@@ -64,7 +64,7 @@ public abstract class GymLogDatabase extends RoomDatabase {
         }
     };
 
-    public abstract GymLogDAO gymLogDAO();
+    public abstract ParkingGarageDAO parkingLotDAO();
 
     public abstract UserDAO userDAO();
 }

@@ -3,11 +3,11 @@ package com.example.parkingGarage.database.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.parkingGarage.database.GymLogDatabase;
+import com.example.parkingGarage.database.ParkingGarageDatabase;
 
 import java.util.Objects;
 
-@Entity(tableName = GymLogDatabase.USER_TABLE)
+@Entity(tableName = ParkingGarageDatabase.USER_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
