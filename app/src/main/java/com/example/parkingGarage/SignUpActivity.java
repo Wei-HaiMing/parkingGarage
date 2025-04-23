@@ -102,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void uploadUserToDatabase(String username, String password, String email){
         //todo Upload the valid user data to the database. Use repository command and add functions. Use DAO and add functions
-        repository.insertUser(username, password, email);
+
 
     }
 
