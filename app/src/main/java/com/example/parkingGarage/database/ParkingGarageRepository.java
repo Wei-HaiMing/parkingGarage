@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.parkingGarage.database.entities.ParkingGarage;
-import com.example.parkingGarage.LandingActivity;
+import com.example.parkingGarage.MainActivity;
 import com.example.parkingGarage.database.entities.User;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class ParkingGarageRepository {
         try{
             return future.get();
         }catch(InterruptedException | ExecutionException e){
-            Log.d(LandingActivity.TAG, "Problem getting ParkingGarageRepository, thread error.");
+            Log.d(MainActivity.TAG, "Problem getting ParkingGarageRepository, thread error.");
         }
         return null;
     }
@@ -61,7 +61,7 @@ public class ParkingGarageRepository {
         try{
             return future.get();
         }catch(InterruptedException | ExecutionException e){
-            Log.i(LandingActivity.TAG, "Problem when getting all ParkingGarageLog in the repository");
+            Log.i(MainActivity.TAG, "Problem when getting all ParkingGarageLog in the repository");
         }
         return null;
     }
@@ -108,7 +108,7 @@ public class ParkingGarageRepository {
         try{
             return future.get();
         }catch(InterruptedException | ExecutionException e){
-            Log.i(LandingActivity.TAG, "Problem when getting all ParkingLogs in the repository");
+            Log.i(MainActivity.TAG, "Problem when getting all ParkingLogs in the repository");
         }
         return null;
     }
