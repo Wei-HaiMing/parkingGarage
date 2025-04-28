@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
 public abstract class ParkingGarageDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
-    private static final String DATABASE_NAME = "GymLogDatabase";
+    private static final String DATABASE_NAME = "ParkingGarageDatabase";
     public static final String PARKING_LOG_TABLE = "parkingLogTable";
 
     private static volatile ParkingGarageDatabase INSTANCE;
