@@ -92,6 +92,11 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        if(password.length() < 3){
+            toastMaker("Password too small, please extend it.");
+            return;
+        }
+
         if(!password.equals(confirmPassword)){
             toastMaker("The passwords do not match, please rewrite it.");
             return;
