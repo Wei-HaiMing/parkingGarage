@@ -23,8 +23,6 @@ public class LandingActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
-
         binding.activityLandingLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
