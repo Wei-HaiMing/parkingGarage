@@ -1,29 +1,6 @@
-//package com.example.parkingGarage;
-//
-//import android.os.Bundle;
-//
-//import androidx.activity.EdgeToEdge;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.core.graphics.Insets;
-//import androidx.core.view.ViewCompat;
-//import androidx.core.view.WindowInsetsCompat;
-//
-//public class SignUpActivity extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        EdgeToEdge.enable(this);
-//        setContentView(R.layout.activity_sign_up);
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
-//    }
-//}
-
 package com.example.parkingGarage;
+
+import static com.example.parkingGarage.LoginActivity.loginIntentFactory;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +11,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.parkingGarage.database.ParkingGarageDatabase;
 import com.example.parkingGarage.database.ParkingGarageRepository;
+import com.example.parkingGarage.database.UserDAO;
+import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.databinding.ActivitySignUpBinding;
 
 
@@ -69,14 +49,9 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void verifyUser(){
-        //todo add checks to validate all fields, have a query add user to the database and have Alert Dialog
-        // show success and go back to MainActivity or show failure, what failuere, and do nothing.
-
-
         String username = binding.signUpUserNameEditText.getText().toString();
         String email = binding.signUpEmailEditText.getText().toString();
         String password = binding.signUpPasswordEditText.getText().toString();
@@ -104,7 +79,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         toastMaker("Hello " + username + "! Sign in to get Started!");
         uploadUserToDatabase(username, password, email);
-
+        Intent intent = loginIntentFactory(getApplicationContext());
+        startActivity(intent);
 
 //        String username = binding.userNameLoginEditText.getText().toString();
 //        if(username.isEmpty()){
@@ -130,8 +106,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void uploadUserToDatabase(String username, String password, String email){
         //todo Upload the valid user data to the database. Use repository command and add functions. Use DAO and add functions
-
-
+        User user = new User(username, password, email);
+        repository.insertUser(user);
     }
 
     private void toastMaker(String message) {
