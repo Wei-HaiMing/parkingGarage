@@ -13,7 +13,6 @@ public class User {
     private int id;
     private String username;
     private String password;
-
     private String email;
     private boolean isAdmin;
 
@@ -68,4 +67,12 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
+

@@ -21,4 +21,6 @@
     <string name="options">Options</string>
     <string name="admin_area">Admin Area</string>
     <string name="back">Back</string>
+    <string name="enter_your_payment_information">Enter Your Payment Information</string>
+    <string name="options_menu">Options Menu</string>
 </resources>
