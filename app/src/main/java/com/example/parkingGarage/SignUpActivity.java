@@ -10,10 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import com.example.parkingGarage.database.ParkingGarageDatabase;
 import com.example.parkingGarage.database.ParkingGarageRepository;
-import com.example.parkingGarage.database.UserDAO;
 import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.databinding.ActivitySignUpBinding;
 
@@ -82,26 +79,6 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intent = loginIntentFactory(getApplicationContext());
         startActivity(intent);
 
-//        String username = binding.userNameLoginEditText.getText().toString();
-//        if(username.isEmpty()){
-//            toastMaker("Username should not be blank");
-//            return;
-//        }
-//        LiveData<User> userObserver = repository.getUserByUserName(username);
-//        userObserver.observe(this, user -> {
-//            if(user != null){
-//                String password = binding.passwordLoginEditText.getText().toString();
-//                if(password.equals(user.getPassword())){
-//                    startActivity(LandingActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
-//                } else {
-//                    toastMaker("Invalid password");
-//                    binding.passwordLoginEditText.setSelection(0);
-//                }
-//            }else{
-//                toastMaker(String.format("%s is not a valid username.", username));
-//                binding.userNameLoginEditText.setSelection(0);
-//            }
-//        });
     }
 
     private void uploadUserToDatabase(String username, String password, String email){
