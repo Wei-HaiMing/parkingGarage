@@ -14,4 +14,11 @@
     <string name="login">Login!</string>
     <string name="preference_file_key">uwuPreferenceFileNameParkingGarage</string>
     <string name="preference_userId_key">uwuPreferenceUserIdKeyParkingGarage</string>
+    <string name="welcome_user">Welcome User!</string>
+    <string name="quick_find">Quick Find</string>
+    <string name="parking_garages">Parking Garages</string>
+    <string name="view_current_space">View Current Space</string>
+    <string name="options">Options</string>
+    <string name="admin_area">Admin Area</string>
+    <string name="back">Back</string>
 </resources>
