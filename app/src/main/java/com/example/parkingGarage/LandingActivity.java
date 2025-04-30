@@ -37,7 +37,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(SignUpActivity.loginIntentFactory(getApplicationContext()));
+                startActivity(SignUpActivity.signUpIntentFactory(getApplicationContext()));
             }
         });
 
