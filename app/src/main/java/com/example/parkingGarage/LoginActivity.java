@@ -29,8 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
         repository = ParkingGarageRepository.getRepository(getApplication());
 
-
-
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
