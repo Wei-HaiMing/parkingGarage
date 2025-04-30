@@ -5,36 +5,32 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkingGarage.database.ParkingGarageRepository;
-import com.example.parkingGarage.database.entities.ParkingGarage;
 import com.example.parkingGarage.database.entities.User;
-import com.example.parkingGarage.databinding.ActivityLandingBinding;
-import com.example.parkingGarage.databinding.ActivityMainBinding;
-import com.example.parkingGarage.viewHolders.ParkingGarageAdapter;
+import com.example.parkingGarage.databinding.ActivityMenuBinding;
 import com.example.parkingGarage.viewHolders.ParkingGarageViewModel;
 
-import java.util.ArrayList;
+public class MenuActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-    private static final String MAIN_ACTIVITY_USER_ID = "com.example.parkingGarage.MAIN_ACTIVITY_USER_ID";
+    private ActivityMenuBinding binding;
+
+    private static final String MENU_ACTIVITY_USER_ID = "com.example.parkingGarage.MENU_ACTIVITY_USER_ID";
 
     static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.parkingGarage.SAVED_INSTANCE_STATE_USERID_KEY";
 
     private static final int LOGGED_OUT = -1;
-    private ActivityMainBinding binding;
+
     private ParkingGarageRepository repository;
 
     private ParkingGarageViewModel parkingGarageViewModel;
@@ -47,67 +43,56 @@ public class MainActivity extends AppCompatActivity {
     private int loggedInUserId = -1;
     private User user;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        binding = com.example.parkingGarage.databinding.ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         parkingGarageViewModel = new ViewModelProvider(this).get(ParkingGarageViewModel.class);
 
 
-        RecyclerView recyclerView = binding.logDisplayRecyclerView;
-        final ParkingGarageAdapter adapter = new ParkingGarageAdapter(new ParkingGarageAdapter.ParkingGarageDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        RecyclerView recyclerView = binding.logDisplayRecyclerView;
+//        final ParkingGarageAdapter adapter = new ParkingGarageAdapter(new ParkingGarageAdapter.ParkingGarageDiff());
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         repository = ParkingGarageRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
-            adapter.submitList(gymLogs);
-        });
+//        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
+//            adapter.submitList(gymLogs);
+//        });
 
         // User is not logged in at this point, go to login screen
-//        if(loggedInUserId == -1){
-//            Intent intent = LandingActivity.landingActivityIntentFactory(getApplicationContext());
-//            startActivity(intent);
-//        }
-//        else{
-//            LiveData<Boolean> userObserver = repository.getAdminStatus(loggedInUserId);
-//            userObserver.observe(this, adminStatus -> {
-//                if(adminStatus){
-//                    binding.adminAreaButton.setVisibility(View.VISIBLE);
-//                }
-//                else{
-//                    binding.adminAreaButton.setVisibility(View.INVISIBLE);
-//                }
-//            });
-//        }
-
-
+        if(loggedInUserId == -1){
+            Intent intent = LandingActivity.landingActivityIntentFactory(getApplicationContext());
+            startActivity(intent);
+        }
+        else{
+            LiveData<Boolean> userObserver = repository.getAdminStatus(loggedInUserId);
+            userObserver.observe(this, adminStatus -> {
+                if(adminStatus){
+                    binding.adminAreaButton.setVisibility(View.VISIBLE);
+                }
+                else{
+                    binding.adminAreaButton.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
 
         updateSharedPreference();
 
-
-
-
-        binding.logButton.setOnClickListener(new View.OnClickListener(){
+        binding.parkingGarageSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getInformationFromDisplay();
-                insertGymLogRecord();
+                startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext()));
             }
         });
 
-        binding.mainBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = MenuActivity.menuActivityIntentFactory(getApplicationContext(), user.getId());
-                startActivity(intent);
-            }
-        });
+
+
     }
 
     private void loginUser(Bundle savedInstanceState) {
@@ -119,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             loggedInUserId = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
         }
         if(loggedInUserId == LOGGED_OUT){
-            loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
+            loggedInUserId = getIntent().getIntExtra(MENU_ACTIVITY_USER_ID, LOGGED_OUT);
         }
         if(loggedInUserId == LOGGED_OUT){
             return;
@@ -166,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showLogoutDialog(){
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MenuActivity.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
         alertBuilder.setMessage("Logout?");
@@ -191,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
     private void logout() {
         loggedInUserId = LOGGED_OUT;
         updateSharedPreference();
-        getIntent().putExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
+        getIntent().putExtra(MENU_ACTIVITY_USER_ID, LOGGED_OUT);
 
         startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
     }
@@ -205,44 +190,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    static Intent mainActivityIntentFactory(Context context){
-        return new Intent(context, MainActivity.class);
-    }
-
-    private void insertGymLogRecord(){
-        if(mExercise.isEmpty()){
-            return;
-        }
-        ParkingGarage log = new ParkingGarage(mExercise, mWeight, mReps, loggedInUserId);
-        repository.insertParkingLog(log);
-    }
-
-    @Deprecated
-    private void updateDisplay(){
-        ArrayList<ParkingGarage> allLogs = repository.getAllLogsByUserId(loggedInUserId);
-        if(allLogs.isEmpty()){
-//            binding.logDisplayTextView.setText(R.string.nothing_to_show_time_to_hit_the_gym);
-        }
-        StringBuilder sb = new StringBuilder();
-        for(ParkingGarage log : allLogs){
-            sb.append(log);
-        }
-//        binding.logDisplayTextView.setText(sb.toString());
-    }
-
-    private void getInformationFromDisplay(){
-        mExercise = binding.exerciseInputEditText.getText().toString();
-        try {
-            mWeight = Double.parseDouble(binding.weightInputEditText.getText().toString());
-        }catch(NumberFormatException e){
-            Log.d(TAG, "Error reading value from Weight edit text.");
-        }
-
-        try {
-            mReps = Integer.parseInt(binding.repInputEditText.getText().toString());
-        }catch(NumberFormatException e){
-            Log.d(TAG, "Error reading value from reps edit text.");
-        }
+    static Intent menuActivityIntentFactory(Context context, int userId){
+        Intent intent = new Intent(context, MenuActivity.class);
+        intent.putExtra(MENU_ACTIVITY_USER_ID, userId);
+        return intent;
     }
 }
