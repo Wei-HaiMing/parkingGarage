@@ -55,10 +55,10 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 UserDAO dao = INSTANCE.userDAO();
                 dao.deleteAll();
-                User admin = new User("admin1", "admin1");
+                User admin = new User("admin1", "admin1", "admin@admin.com");
                 admin.setAdmin(true);
                 dao.insert(admin);
-                User testUser1 = new User("testUser1", "testUser1");
+                User testUser1 = new User("testUser1", "testUser1", "user1@users.com");
                 dao.insert(testUser1);
             });
         }
