@@ -97,14 +97,13 @@
         app:layout_constraintTop_toBottomOf="@+id/repInputEditText" />
 
     <Button
-        android:id="@+id/adminAreaButton"
-        android:layout_width="187dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="32dp"
-        android:text="Admin Area"
-        android:visibility="invisible"
-        tools:visibility="visible"
+        android:id="@+id/mainBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/back"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logButton" />
 
