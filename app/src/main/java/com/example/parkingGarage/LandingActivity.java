@@ -33,6 +33,14 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
+        binding.activityLandingSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(SignUpActivity.loginIntentFactory(getApplicationContext()));
+            }
+        });
+
     }
 
 

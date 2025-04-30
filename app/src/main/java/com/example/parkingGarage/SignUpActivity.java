@@ -7,11 +7,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 
 
 import com.example.parkingGarage.database.ParkingGarageRepository;
-import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.databinding.ActivitySignUpBinding;
 
 
