@@ -13,14 +13,11 @@ public class User {
     private int id;
     private String username;
     private String password;
-
-    private String email;
     private boolean isAdmin;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.email = email;
         isAdmin = false;
     }
 
