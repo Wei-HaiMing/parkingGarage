@@ -97,7 +97,6 @@
         app:layout_constraintTop_toBottomOf="@+id/repInputEditText" />
 
     <Button
-        mainActivityView
         android:id="@+id/mainBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
