@@ -14,4 +14,6 @@
     <string name="login">Login!</string>
     <string name="preference_file_key">uwuPreferenceFileNameParkingGarage</string>
     <string name="preference_userId_key">uwuPreferenceUserIdKeyParkingGarage</string>
+    <string name="options_menu">Options Menu</string>
+    <string name="enter_your_payment_information">Enter Your Payment Information</string>
 </resources>
