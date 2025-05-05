@@ -17,6 +17,9 @@ public interface ParkingFloorDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ParkingFloor parkingFloor);
 
+    @Query("DELETE FROM " + ParkingGarageDatabase.PARKING_FLOOR_TABLE) void deleteAll();
+
+
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_FLOOR_TABLE + " ORDER BY floorId")
     List<ParkingFloor> getAllFloors();
 

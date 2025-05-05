@@ -8,10 +8,10 @@ import androidx.lifecycle.LiveData;
 import com.example.parkingGarage.database.entities.ParkingFloor;
 import com.example.parkingGarage.database.entities.ParkingGarage;
 import com.example.parkingGarage.MainActivity;
+import com.example.parkingGarage.database.entities.ParkingSpace;
 import com.example.parkingGarage.database.entities.User;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -21,7 +21,7 @@ public class ParkingGarageRepository {
 
     private ParkingFloorDAO parkingFloorDAO;
 
-//    private ParkingSpaceDAO parkingSpaceDAO;
+    private ParkingSpaceDAO parkingSpaceDAO;
     private final UserDAO userDAO;
     private ArrayList<ParkingGarage> allLogs;
 
@@ -29,12 +29,16 @@ public class ParkingGarageRepository {
 
     private ParkingGarageRepository(Application application){
         ParkingGarageDatabase db = ParkingGarageDatabase.getDatabase(application);
-        this.parkingGarageDAO = db.parkingLotDAO();
+        this.parkingGarageDAO = db.parkingGarageDAO();
         this.parkingFloorDAO = db.parkingFloorDAO();
+        this.parkingSpaceDAO = db.parkingSpaceDAO();
         this.userDAO = db.userDAO();
 //        this.allLogs = (ArrayList<ParkingGarage>) this.parkingGarageDAO.getAllRecords();
     }
 
+    public LiveData<ParkingGarage> getGarageById(int garageId){
+        return parkingGarageDAO.getGarageById(garageId);
+    }
     public static ParkingGarageRepository getRepository(Application application){
         if(repository != null){
             return repository;
@@ -71,6 +75,38 @@ public class ParkingGarageRepository {
         }
         return null;
     }
+    public ArrayList<ParkingFloor> getAllFloors(){
+        Future<ArrayList<ParkingFloor>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+                new Callable<ArrayList<ParkingFloor>>() {
+                    @Override
+                    public ArrayList<ParkingFloor> call() throws Exception {
+                        return (ArrayList<ParkingFloor>) parkingFloorDAO.getAllFloors();
+                    }
+                }
+        );
+        try{
+            return future.get();
+        }catch(InterruptedException | ExecutionException e){
+            Log.i(MainActivity.TAG, "Problem when getting all ParkingFloors in the repository");
+        }
+        return null;
+    }
+    public ArrayList<ParkingSpace> getAllSpaces(){
+        Future<ArrayList<ParkingSpace>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+                new Callable<ArrayList<ParkingSpace>>() {
+                    @Override
+                    public ArrayList<ParkingSpace> call() throws Exception {
+                        return (ArrayList<ParkingSpace>) parkingSpaceDAO.getAllSpaces();
+                    }
+                }
+        );
+        try{
+            return future.get();
+        }catch(InterruptedException | ExecutionException e){
+            Log.i(MainActivity.TAG, "Problem when getting all ParkingSpaces in the repository");
+        }
+        return null;
+    }
 
     public void insertParkingLog(ParkingGarage parkingGarage){
         ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
@@ -86,7 +122,9 @@ public class ParkingGarageRepository {
         });
     }
 
-
+    public LiveData<ParkingSpace> getSpaceById(int spaceId){
+        return parkingSpaceDAO.getSpaceById(spaceId);
+    }
 
     @Deprecated
     public void insertUser(User... user){
@@ -102,6 +140,14 @@ public class ParkingGarageRepository {
 
     public LiveData<ParkingFloor> getFloorById(int floorId){
         return parkingFloorDAO.getFloorByFloorId(floorId);
+    }
+
+    public LiveData<ParkingGarage> getGarageByFloorGarageId(int garageId){
+        return parkingFloorDAO.getGarageByFloorGarageId(garageId);
+    }
+
+    public LiveData<ParkingFloor> getFloorBySpaceFloorId(int floorId){
+        return parkingSpaceDAO.getFloorBySpaceFloorId(floorId);
     }
 
     public LiveData<User> getUserByUserId(int userId) {

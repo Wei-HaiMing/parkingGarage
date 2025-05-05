@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,14 +21,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkingGarage.database.ParkingGarageRepository;
-import com.example.parkingGarage.database.entities.ParkingGarage;
+import com.example.parkingGarage.database.entities.ParkingFloor;
+import com.example.parkingGarage.database.entities.ParkingSpace;
 import com.example.parkingGarage.database.entities.User;
-import com.example.parkingGarage.databinding.ActivityLandingBinding;
 import com.example.parkingGarage.databinding.ActivityMainBinding;
 import com.example.parkingGarage.viewHolders.ParkingGarageAdapter;
 import com.example.parkingGarage.viewHolders.ParkingGarageViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.parkingGarage.MAIN_ACTIVITY_USER_ID";
@@ -40,8 +43,15 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "DAC_GYMLOG";
 
     String parkingGarageName;
-    private int garageId;
-    private int parkinggarageuserId;
+    private int garageId = -1;
+
+    private String garageName = null;
+
+    private int floorNum = -1;
+    private int spaceNum = -1;
+    private ArrayList<ParkingFloor> floorSearch = new ArrayList<>();
+    private ArrayList<ParkingSpace> spaceSearch = new ArrayList<>();
+    private int parkingGarageUserId;
     private int loggedInUserId = -1;
     private User user;
 
@@ -63,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         repository = ParkingGarageRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-//        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
+//        parkingGarageViewModel.getAllFloorsById(loggedInUserId).observe(this, gymLogs -> {
 //            adapter.submitList(gymLogs);
 //        });
 
@@ -85,13 +95,60 @@ public class MainActivity extends AppCompatActivity {
 //        }
         updateSharedPreference();
 
-//        binding.logButton.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                getInformationFromDisplay();
+        // TODO: implement search for a parking spot
+        binding.searchButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                getInformationFromDisplay();
+                if(floorSearch.size() != 0){
+                    floorSearch.clear();
+                }
+                if(spaceSearch.size() != 0){
+                    spaceSearch.clear();
+                }
+                if(garageId != -1){
+                    ArrayList<ParkingFloor> allFloors = repository.getAllFloors();
+                    ArrayList<ParkingSpace> allSpaces = repository.getAllSpaces();
+                    if(floorNum == -1 && spaceNum == -1){ // search all floors for all open spaces
+                        for(int i = 0; i < allFloors.size(); i++) {
+                            if (allFloors.get(i).getGarageId() == garageId) {
+                                floorSearch.add(allFloors.get(i));
+                            }
+                        }
+                        for(int i = 0; i < allSpaces.size(); i++){
+                            if(allSpaces.get(i).getFloorId() == floorNum && !allSpaces.get(i).isOccupied()){
+                                spaceSearch.add(allSpaces.get(i));
+                            }
+                        }
+                        Toast.makeText(MainActivity.this, "Floor and Space were empty", Toast.LENGTH_SHORT).show();
+                    }else if(spaceNum == -1){ // search everything in floor
+                        floorSearch.add(repository.getFloorById(floorNum).getValue());
+                        for(int i = 0; i < allSpaces.size(); i++){
+                            if(allSpaces.get(i).getFloorId() == floorNum && !allSpaces.get(i).isOccupied()){
+                                spaceSearch.add(allSpaces.get(i));
+                            }
+                        }
+                        Toast.makeText(MainActivity.this, "Space was empty", Toast.LENGTH_SHORT).show();
+                    }else{
+                        try {
+                            floorSearch.add(repository.getFloorById(floorNum).getValue());
+                        }catch(Exception e){
+                            Toast.makeText(MainActivity.this, "Error Reading Floor Number " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        try {
+                            spaceSearch.add(repository.getSpaceById(spaceNum).getValue());
+                        }catch(Exception e){
+                            Toast.makeText(MainActivity.this, "Error Reading Space Number " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        Toast.makeText(MainActivity.this, "Found Space since space was entered", Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+                    Toast.makeText(MainActivity.this, "You must enter a Garage Name", Toast.LENGTH_SHORT).show();
+                }
 //                insertGymLogRecord();
-//            }
-//        });
+            }
+        });
 
         binding.mainBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +157,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void getInformationFromDisplay(){
+        garageId = Integer.parseInt(binding.weightInputEditText.getText().toString());
+        try {
+            floorNum = Integer.parseInt(binding.weightInputEditText.getText().toString());
+        }catch(NumberFormatException e){
+            Log.d(TAG, "Error reading value from floor number edit text.");
+        }
+
+        try {
+            spaceNum = Integer.parseInt(binding.repInputEditText.getText().toString());
+        }catch(NumberFormatException e){
+            Log.d(TAG, "Error reading value from space number edit text.");
+        }
     }
 
     private void loginUser(Bundle savedInstanceState) {
@@ -223,18 +294,5 @@ public class MainActivity extends AppCompatActivity {
 ////        binding.logDisplayTextView.setText(sb.toString());
 //    }
 
-//    private void getInformationFromDisplay(){
-//        mExercise = binding.exerciseInputEditText.getText().toString();
-//        try {
-//            mWeight = Double.parseDouble(binding.weightInputEditText.getText().toString());
-//        }catch(NumberFormatException e){
-//            Log.d(TAG, "Error reading value from Weight edit text.");
-//        }
-//
-//        try {
-//            mReps = Integer.parseInt(binding.repInputEditText.getText().toString());
-//        }catch(NumberFormatException e){
-//            Log.d(TAG, "Error reading value from reps edit text.");
-//        }
-//    }
+
 }

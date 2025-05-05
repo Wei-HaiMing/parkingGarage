@@ -16,11 +16,13 @@ public interface ParkingSpaceDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ParkingSpace parkingSpace);
 
+    @Query("DELETE FROM " + ParkingGarageDatabase.PARKING_SPACE_TABLE) void deleteAll();
+
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_SPACE_TABLE + " ORDER BY spaceId")
     List<ParkingSpace> getAllSpaces();
 
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_SPACE_TABLE + " WHERE spaceId == :spaceId")
-    LiveData<ParkingSpace> getSpaceBySpaceId(int spaceId);
+    LiveData<ParkingSpace> getSpaceById(int spaceId);
 
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_FLOOR_TABLE + " WHERE floorId == :floorId")
     LiveData<ParkingFloor> getFloorBySpaceFloorId(int floorId);

@@ -15,7 +15,7 @@ public class ParkingSpace{
     @PrimaryKey(autoGenerate = true)
     private int spaceId;
     private int floorId;
-    public ParkingSpace(int spaceNum, boolean occupied, int spaceId, int floorId) {
+    public ParkingSpace(int spaceNum, boolean occupied, int floorId) {
         this.spaceNum = spaceNum;
         this.occupied = occupied;
         this.spaceId = spaceId;

@@ -1,6 +1,5 @@
 package com.example.parkingGarage.database.entities;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -19,11 +18,10 @@ public class ParkingFloor {
 
     private int garageId;
 
-    public ParkingFloor(int spaceCount, int floorNum, int spacesAvailable, int floorId, int garageId) {
+    public ParkingFloor(int spaceCount, int floorNum, int spacesAvailable, int garageId) {
         this.spaceCount = spaceCount;
         this.floorNum = floorNum;
         this.spacesAvailable = spacesAvailable;
-        this.floorId = floorId;
         this.garageId = garageId;
     }
 
