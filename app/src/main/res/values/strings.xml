@@ -40,4 +40,6 @@
     <string name="adjust_pricing">Adjust Pricing</string>
     <string name="parking_lots">Parking Lots:</string>
     <string name="lot">Lot:</string>
+    <string name="current_space">Current Space</string>
+    <string name="currentSpaceBack">Back</string>
 </resources>

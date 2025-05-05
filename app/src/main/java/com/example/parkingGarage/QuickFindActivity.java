@@ -30,7 +30,6 @@ public class QuickFindActivity extends AppCompatActivity {
     static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.parkingGarage.SAVED_INSTANCE_STATE_USERID_KEY";
 
     private ActivityQuickFindBinding binding;
-
     private User user;
 
 

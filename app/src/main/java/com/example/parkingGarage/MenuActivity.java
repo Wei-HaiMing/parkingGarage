@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private ParkingGarageRepository repository;
 
-    private ParkingGarageViewModel parkingGarageViewModel;
+//    private ParkingGarageViewModel parkingGarageViewModel;
 
     public static final String TAG = "DAC_GYMLOG";
 //    String mExercise = "";
@@ -51,7 +51,7 @@ public class MenuActivity extends AppCompatActivity {
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        parkingGarageViewModel = new ViewModelProvider(this).get(ParkingGarageViewModel.class);
+//        parkingGarageViewModel = new ViewModelProvider(this).get(ParkingGarageViewModel.class);
 
 
 //        RecyclerView recyclerView = binding.logDisplayRecyclerView;
