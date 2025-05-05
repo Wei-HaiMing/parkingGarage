@@ -38,9 +38,8 @@ public class QuickFindActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityQuickFindBinding.inflate(getLayoutInflater());
-
+        setContentView(binding.getRoot());
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_quick_find);
         repository = ParkingGarageRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.QuickFindTextView), (v, insets) -> {
