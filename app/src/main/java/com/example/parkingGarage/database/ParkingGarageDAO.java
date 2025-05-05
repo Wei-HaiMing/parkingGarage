@@ -18,8 +18,10 @@ public interface ParkingGarageDAO {
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_GARAGE_TABLE + " ORDER BY date DESC")
     List<ParkingGarage> getAllGarages();
 
-    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_GARAGE_TABLE + " WHERE userId = :userId ORDER BY date DESC")
-    LiveData<List<ParkingGarage>> getAllLogsByUserId(int userId);
+//    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_GARAGE_TABLE + " WHERE userId = :userId ORDER BY date DESC")
+//    LiveData<List<ParkingGarage>> getAllLogsByUserId(int userId);
+
+
 
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_GARAGE_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
     List<ParkingGarage> getRecordsetUserId(int loggedInUserId);

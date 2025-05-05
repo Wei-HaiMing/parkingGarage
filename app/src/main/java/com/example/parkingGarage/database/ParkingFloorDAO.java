@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.parkingGarage.database.entities.ParkingFloor;
-import com.example.parkingGarage.database.entities.User;
 
 
 import java.util.List;
@@ -21,7 +20,7 @@ public interface ParkingFloorDAO {
     List<ParkingFloor> getAllFloors();
 
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_FLOOR_TABLE + " WHERE floorId == :floorId")
-    LiveData<ParkingFloor> getFloorById(int floorId);
+    LiveData<ParkingFloor> getFloorByFloorId(int floorId);
 
 
 }

@@ -30,7 +30,7 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
 
     public static final String PARKING_FLOOR_TABLE = "parkingFloorTable";
 
-    public static final String PARKING_SPACE_TABLE = "parkingSpace Table";
+    public static final String PARKING_SPACE_TABLE = "parkingSpaceTable";
 
     private static volatile ParkingGarageDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;

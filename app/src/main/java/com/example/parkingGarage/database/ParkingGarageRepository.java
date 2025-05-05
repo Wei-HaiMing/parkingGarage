@@ -92,7 +92,7 @@ public class ParkingGarageRepository {
     }
 
     public LiveData<ParkingFloor> getFloorById(int floorId){
-        return parkingFloorDAO.getFloorById(floorId);
+        return parkingFloorDAO.getFloorByFloorId(floorId);
     }
 
     public LiveData<User> getUserByUserId(int userId) {
