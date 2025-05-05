@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -93,6 +94,37 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        binding.quickFindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = QuickFindActivity.quickFindFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        binding.viewCurrentSpaceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CurrentSpaceActivity.currentSpaceFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        binding.optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = OptionsActivity.optionsFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        binding.adminAreaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdjustPricingActivity.adjustPriceIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     private void loginUser(Bundle savedInstanceState) {
@@ -179,6 +211,10 @@ public class MenuActivity extends AppCompatActivity {
         getIntent().putExtra(MENU_ACTIVITY_USER_ID, LOGGED_OUT);
 
         startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+    }
+
+    private void toastMaker(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void updateSharedPreference(){
