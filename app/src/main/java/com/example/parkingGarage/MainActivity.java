@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.parkingGarage.MAIN_ACTIVITY_USER_ID";
 
     static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.parkingGarage.SAVED_INSTANCE_STATE_USERID_KEY";
-
     private static final int LOGGED_OUT = -1;
     private ActivityMainBinding binding;
     private ParkingGarageRepository repository;
@@ -195,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
         sharedPrefEditor.apply();
 
     }
-
 
     static Intent mainActivityIntentFactory(Context context){
         return new Intent(context, MainActivity.class);
