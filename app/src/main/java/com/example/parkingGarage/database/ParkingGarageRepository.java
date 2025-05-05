@@ -26,7 +26,7 @@ public class ParkingGarageRepository {
         ParkingGarageDatabase db = ParkingGarageDatabase.getDatabase(application);
         this.parkingGarageDAO = db.parkingLotDAO();
         this.userDAO = db.userDAO();
-        this.allLogs = (ArrayList<ParkingGarage>) this.parkingGarageDAO.getAllRecords();
+//        this.allLogs = (ArrayList<ParkingGarage>) this.parkingGarageDAO.getAllRecords();
     }
 
     public static ParkingGarageRepository getRepository(Application application){
@@ -49,22 +49,22 @@ public class ParkingGarageRepository {
         return null;
     }
 
-    public ArrayList<ParkingGarage> getAllLogs(){
-        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
-                new Callable<ArrayList<ParkingGarage>>() {
-                    @Override
-                    public ArrayList<ParkingGarage> call() throws Exception {
-                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getAllRecords();
-                    }
-                }
-        );
-        try{
-            return future.get();
-        }catch(InterruptedException | ExecutionException e){
-            Log.i(MainActivity.TAG, "Problem when getting all ParkingGarageLog in the repository");
-        }
-        return null;
-    }
+//    public ArrayList<ParkingGarage> getAllLogs(){
+//        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+//                new Callable<ArrayList<ParkingGarage>>() {
+//                    @Override
+//                    public ArrayList<ParkingGarage> call() throws Exception {
+//                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getAllRecords();
+//                    }
+//                }
+//        );
+//        try{
+//            return future.get();
+//        }catch(InterruptedException | ExecutionException e){
+//            Log.i(MainActivity.TAG, "Problem when getting all ParkingGarageLog in the repository");
+//        }
+//        return null;
+//    }
 
     public void insertParkingLog(ParkingGarage parkingGarage){
         ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
@@ -101,25 +101,25 @@ public class ParkingGarageRepository {
         return userDAO.getAdminStatus(userId);
     }
 
-    public LiveData<List<ParkingGarage>> getAllLogsByUserIdLiveData(int loggedInUserId){
-        return parkingGarageDAO.getRecordsetUserIdLiveData(loggedInUserId);
-    }
+//    public LiveData<List<ParkingGarage>> getAllLogsByUserIdLiveData(int loggedInUserId){
+//        return parkingGarageDAO.getRecordsetUserIdLiveData(loggedInUserId);
+//    }
 
-    @Deprecated
-    public ArrayList<ParkingGarage> getAllLogsByUserId(int loggedInUserId) {
-        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
-                new Callable<ArrayList<ParkingGarage>>() {
-                    @Override
-                    public ArrayList<ParkingGarage> call() throws Exception {
-                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getRecordsetUserId(loggedInUserId);
-                    }
-                }
-        );
-        try{
-            return future.get();
-        }catch(InterruptedException | ExecutionException e){
-            Log.i(MainActivity.TAG, "Problem when getting all ParkingLogs in the repository");
-        }
-        return null;
-    }
+//    @Deprecated
+//    public ArrayList<ParkingGarage> getAllLogsByUserId(int loggedInUserId) {
+//        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+//                new Callable<ArrayList<ParkingGarage>>() {
+//                    @Override
+//                    public ArrayList<ParkingGarage> call() throws Exception {
+//                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getRecordsetUserId(loggedInUserId);
+//                    }
+//                }
+//        );
+//        try{
+//            return future.get();
+//        }catch(InterruptedException | ExecutionException e){
+//            Log.i(MainActivity.TAG, "Problem when getting all ParkingLogs in the repository");
+//        }
+//        return null;
+//    }
 }
