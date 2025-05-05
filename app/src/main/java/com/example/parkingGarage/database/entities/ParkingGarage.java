@@ -11,81 +11,43 @@ import java.util.Objects;
 @Entity(tableName = ParkingGarageDatabase.PARKING_LOG_TABLE)
 public class ParkingGarage {
     @PrimaryKey(autoGenerate = true)
-    private int id;
-    private String exercise;
-    private double weight;
-    private int reps;
-    private LocalDateTime date;
+    String name;
+    private int garageId;
     private int userId;
 
-    public ParkingGarage(String exercise, double weight, int reps, int userId) {
-        this.exercise = exercise;
-        this.weight = weight;
-        this.reps = reps;
+    public ParkingGarage(String name, int garageId, int userId) {
+        this.name = name;
+        this.garageId = garageId;
         this.userId = userId;
-        date = LocalDateTime.now();
-    }
-
-    @Override
-    public String toString() {
-        return  "garage: " + exercise + '\n' +
-                "floor: " + weight + '\n' +
-                "spot" + reps + '\n' +
-                '\n' +
-                "=-=-=--=-=-=\n";
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ParkingGarage parkingGarage = (ParkingGarage) o;
-        return id == parkingGarage.id && Double.compare(weight, parkingGarage.weight) == 0 && reps == parkingGarage.reps && userId == parkingGarage.userId && Objects.equals(exercise, parkingGarage.exercise) && Objects.equals(date, parkingGarage.date);
+        ParkingGarage that = (ParkingGarage) o;
+        return garageId == that.garageId && userId == that.userId && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, exercise, weight, reps, date, userId);
+        return Objects.hash(name, garageId, userId);
     }
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getExercise() {
-        return exercise;
+    public int getGarageId() {
+        return garageId;
     }
 
-    public void setExercise(String exercise) {
-        this.exercise = exercise;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public int getReps() {
-        return reps;
-    }
-
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setGarageId(int garageId) {
+        this.garageId = garageId;
     }
 
     public int getUserId() {
@@ -96,3 +58,4 @@ public class ParkingGarage {
         this.userId = userId;
     }
 }
+

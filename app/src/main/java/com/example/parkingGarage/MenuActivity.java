@@ -187,7 +187,6 @@ public class MenuActivity extends AppCompatActivity {
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
         sharedPrefEditor.apply();
-
     }
 
     static Intent menuActivityIntentFactory(Context context, int userId){
