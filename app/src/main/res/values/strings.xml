@@ -42,4 +42,5 @@
     <string name="lot">Lot:</string>
     <string name="current_space">Current Space</string>
     <string name="currentSpaceBack">Back</string>
+    <string name="OptionsBack">BACK</string>
 </resources>
