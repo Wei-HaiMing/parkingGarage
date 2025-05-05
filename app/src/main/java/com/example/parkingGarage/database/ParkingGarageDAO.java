@@ -28,4 +28,5 @@ public interface ParkingGarageDAO {
 //
 //    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_GARAGE_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
 //    LiveData<List<ParkingGarage>> getRecordsetUserIdLiveData(int loggedInUserId);
+
 }
