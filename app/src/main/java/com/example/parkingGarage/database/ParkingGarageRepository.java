@@ -73,6 +73,15 @@ public class ParkingGarageRepository {
         });
     }
 
+    public void insertUser(User user){
+        ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
+        {
+            userDAO.insert(user);
+        });
+    }
+
+
+
     @Deprecated
     public void insertUser(User... user){
         ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
@@ -95,6 +104,7 @@ public class ParkingGarageRepository {
     public LiveData<List<ParkingGarage>> getAllLogsByUserIdLiveData(int loggedInUserId){
         return parkingGarageDAO.getRecordsetUserIdLiveData(loggedInUserId);
     }
+
     @Deprecated
     public ArrayList<ParkingGarage> getAllLogsByUserId(int loggedInUserId) {
         Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(

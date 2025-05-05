@@ -13,10 +13,11 @@ public class User {
     private int id;
     private String username;
     private String password;
+
     private String email;
     private boolean isAdmin;
 
-    public User(String username, String password) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -67,6 +68,7 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
     public String getEmail() {
         return email;
     }
@@ -75,4 +77,3 @@ public class User {
         this.email = email;
     }
 }
-
