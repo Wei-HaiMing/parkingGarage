@@ -94,4 +94,5 @@ public class SignUpActivity extends AppCompatActivity {
     static Intent signUpIntentFactory(Context context){
         return new Intent(context, SignUpActivity.class);
     }
+
 }
