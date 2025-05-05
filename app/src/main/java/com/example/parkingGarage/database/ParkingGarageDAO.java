@@ -15,15 +15,15 @@ public interface ParkingGarageDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ParkingGarage parkingLog);
 
-    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " ORDER BY date DESC")
-    List<ParkingGarage> getAllRecords();
-
-    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :userId ORDER BY date DESC")
-    LiveData<List<ParkingGarage>> getAllLogsByUserId(int userId);
-
-    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
-    List<ParkingGarage> getRecordsetUserId(int loggedInUserId);
-
-    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
-    LiveData<List<ParkingGarage>> getRecordsetUserIdLiveData(int loggedInUserId);
+//    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " ORDER BY date DESC")
+//    List<ParkingGarage> getAllRecords();
+//
+//    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :userId ORDER BY date DESC")
+//    LiveData<List<ParkingGarage>> getAllLogsByUserId(int userId);
+//
+//    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
+//    List<ParkingGarage> getRecordsetUserId(int loggedInUserId);
+//
+//    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_LOG_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
+//    LiveData<List<ParkingGarage>> getRecordsetUserIdLiveData(int loggedInUserId);
 }
