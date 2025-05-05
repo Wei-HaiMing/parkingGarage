@@ -32,7 +32,7 @@ public class ParkingGarageRepository {
         this.parkingGarageDAO = db.parkingLotDAO();
         this.parkingFloorDAO = db.parkingFloorDAO();
         this.userDAO = db.userDAO();
-        this.allLogs = (ArrayList<ParkingGarage>) this.parkingGarageDAO.getAllGarages();
+//        this.allLogs = (ArrayList<ParkingGarage>) this.parkingGarageDAO.getAllRecords();
     }
 
     public static ParkingGarageRepository getRepository(Application application){
@@ -79,6 +79,15 @@ public class ParkingGarageRepository {
         });
     }
 
+    public void insertUser(User user){
+        ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
+        {
+            userDAO.insert(user);
+        });
+    }
+
+
+
     @Deprecated
     public void insertUser(User... user){
         ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
@@ -102,24 +111,25 @@ public class ParkingGarageRepository {
         return userDAO.getAdminStatus(userId);
     }
 
-    public LiveData<List<ParkingGarage>> getAllLogsByUserIdLiveData(int loggedInUserId){
-        return parkingGarageDAO.getRecordsetUserIdLiveData(loggedInUserId);
-    }
-    @Deprecated
-    public ArrayList<ParkingGarage> getAllLogsByUserId(int loggedInUserId) {
-        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
-                new Callable<ArrayList<ParkingGarage>>() {
-                    @Override
-                    public ArrayList<ParkingGarage> call() throws Exception {
-                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getRecordsetUserId(loggedInUserId);
-                    }
-                }
-        );
-        try{
-            return future.get();
-        }catch(InterruptedException | ExecutionException e){
-            Log.i(MainActivity.TAG, "Problem when getting all ParkingLogs in the repository");
-        }
-        return null;
-    }
+//    public LiveData<List<ParkingGarage>> getAllLogsByUserIdLiveData(int loggedInUserId){
+//        return parkingGarageDAO.getRecordsetUserIdLiveData(loggedInUserId);
+//    }
+
+//    @Deprecated
+//    public ArrayList<ParkingGarage> getAllLogsByUserId(int loggedInUserId) {
+//        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+//                new Callable<ArrayList<ParkingGarage>>() {
+//                    @Override
+//                    public ArrayList<ParkingGarage> call() throws Exception {
+//                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getRecordsetUserId(loggedInUserId);
+//                    }
+//                }
+//        );
+//        try{
+//            return future.get();
+//        }catch(InterruptedException | ExecutionException e){
+//            Log.i(MainActivity.TAG, "Problem when getting all ParkingLogs in the repository");
+//        }
+//        return null;
+//    }
 }
