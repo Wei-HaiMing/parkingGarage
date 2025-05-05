@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.parkingGarage.database.entities.ParkingFloor;
 import com.example.parkingGarage.database.entities.ParkingGarage;
 import com.example.parkingGarage.MainActivity;
 import com.example.parkingGarage.database.entities.User;
@@ -17,6 +18,10 @@ import java.util.concurrent.Future;
 
 public class ParkingGarageRepository {
     private ParkingGarageDAO parkingGarageDAO;
+
+    private ParkingFloorDAO parkingFloorDAO;
+
+//    private ParkingSpaceDAO parkingSpaceDAO;
     private final UserDAO userDAO;
     private ArrayList<ParkingGarage> allLogs;
 
@@ -25,8 +30,9 @@ public class ParkingGarageRepository {
     private ParkingGarageRepository(Application application){
         ParkingGarageDatabase db = ParkingGarageDatabase.getDatabase(application);
         this.parkingGarageDAO = db.parkingLotDAO();
+        this.parkingFloorDAO = db.parkingFloorDAO();
         this.userDAO = db.userDAO();
-        this.allLogs = (ArrayList<ParkingGarage>) this.parkingGarageDAO.getAllRecords();
+        this.allLogs = (ArrayList<ParkingGarage>) this.parkingGarageDAO.getAllGarages();
     }
 
     public static ParkingGarageRepository getRepository(Application application){
@@ -54,7 +60,7 @@ public class ParkingGarageRepository {
                 new Callable<ArrayList<ParkingGarage>>() {
                     @Override
                     public ArrayList<ParkingGarage> call() throws Exception {
-                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getAllRecords();
+                        return (ArrayList<ParkingGarage>) parkingGarageDAO.getAllGarages();
                     }
                 }
         );
@@ -83,6 +89,10 @@ public class ParkingGarageRepository {
 
     public LiveData<User> getUserByUserName(String username) {
         return userDAO.getUserByName(username);
+    }
+
+    public LiveData<ParkingFloor> getFloorById(int floorId){
+        return parkingFloorDAO.getFloorById(floorId);
     }
 
     public LiveData<User> getUserByUserId(int userId) {

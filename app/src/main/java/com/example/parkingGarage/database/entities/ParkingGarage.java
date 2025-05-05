@@ -8,7 +8,7 @@ import com.example.parkingGarage.database.ParkingGarageDatabase;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity(tableName = ParkingGarageDatabase.PARKING_LOG_TABLE)
+@Entity(tableName = ParkingGarageDatabase.PARKING_GARAGE_TABLE)
 public class ParkingGarage {
     @PrimaryKey(autoGenerate = true)
     private int id;

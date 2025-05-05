@@ -10,8 +10,10 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.parkingGarage.database.entities.ParkingFloor;
 import com.example.parkingGarage.database.entities.ParkingGarage;
 import com.example.parkingGarage.MainActivity;
+import com.example.parkingGarage.database.entities.ParkingSpace;
 import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.database.typeConverters.LocalDateTypeConverter;
 
@@ -19,12 +21,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {ParkingGarage.class, User.class}, version = 4, exportSchema = false)
+@Database(entities = {ParkingGarage.class, User.class, ParkingFloor.class, ParkingSpace.class}, version = 5, exportSchema = false)
 public abstract class ParkingGarageDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "ParkingGarageDatabase";
-    public static final String PARKING_LOG_TABLE = "parkingLogTable";
+    public static final String PARKING_GARAGE_TABLE = "parkingGarageTable";
+
+    public static final String PARKING_FLOOR_TABLE = "parkingFloorTable";
+
+    public static final String PARKING_SPACE_TABLE = "parkingSpace Table";
 
     private static volatile ParkingGarageDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -67,4 +73,6 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
     public abstract ParkingGarageDAO parkingLotDAO();
 
     public abstract UserDAO userDAO();
+
+    public abstract ParkingFloorDAO parkingFloorDAO();
 }

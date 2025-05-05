@@ -1,10 +1,18 @@
 package com.example.parkingGarage.database.entities;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.example.parkingGarage.database.ParkingGarageDatabase;
+
 import java.util.Objects;
 
+@Entity(tableName = ParkingGarageDatabase.PARKING_SPACE_TABLE)
 public class ParkingSpace{
     private int spaceNum;
     private boolean occupied;
+
+    @PrimaryKey(autoGenerate = true)
     private int spaceId;
     private int floorId;
     public ParkingSpace(int spaceNum, boolean occupied, int spaceId, int floorId) {

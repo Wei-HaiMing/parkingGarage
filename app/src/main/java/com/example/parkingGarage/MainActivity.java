@@ -65,33 +65,11 @@ public class MainActivity extends AppCompatActivity {
         repository = ParkingGarageRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
-            adapter.submitList(gymLogs);
+        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, parkingGarageLogs -> {
+            adapter.submitList(parkingGarageLogs);
         });
 
-        // User is not logged in at this point, go to login screen
-//        if(loggedInUserId == -1){
-//            Intent intent = LandingActivity.landingActivityIntentFactory(getApplicationContext());
-//            startActivity(intent);
-//        }
-//        else{
-//            LiveData<Boolean> userObserver = repository.getAdminStatus(loggedInUserId);
-//            userObserver.observe(this, adminStatus -> {
-//                if(adminStatus){
-//                    binding.adminAreaButton.setVisibility(View.VISIBLE);
-//                }
-//                else{
-//                    binding.adminAreaButton.setVisibility(View.INVISIBLE);
-//                }
-//            });
-//        }
-
-
-
         updateSharedPreference();
-
-
-
 
         binding.logButton.setOnClickListener(new View.OnClickListener(){
             @Override
