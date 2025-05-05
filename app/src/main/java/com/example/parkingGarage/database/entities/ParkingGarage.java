@@ -11,14 +11,12 @@ import java.util.Objects;
 @Entity(tableName = ParkingGarageDatabase.PARKING_LOG_TABLE)
 public class ParkingGarage {
     @PrimaryKey(autoGenerate = true)
-    String name;
     private int garageId;
-    private int userId;
+    private String name;
 
-    public ParkingGarage(String name, int garageId, int userId) {
+    public ParkingGarage(String name, int garageId) {
         this.name = name;
         this.garageId = garageId;
-        this.userId = userId;
     }
 
     @Override
@@ -26,12 +24,12 @@ public class ParkingGarage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParkingGarage that = (ParkingGarage) o;
-        return garageId == that.garageId && userId == that.userId && Objects.equals(name, that.name);
+        return garageId == that.garageId && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, garageId, userId);
+        return Objects.hash(name, garageId);
     }
 
     public String getName() {
@@ -50,12 +48,5 @@ public class ParkingGarage {
         this.garageId = garageId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }
 

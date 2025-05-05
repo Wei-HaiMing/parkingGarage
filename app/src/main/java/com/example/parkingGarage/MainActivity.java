@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
         repository = ParkingGarageRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
-            adapter.submitList(gymLogs);
-        });
+//        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
+//            adapter.submitList(gymLogs);
+//        });
 
         // User is not logged in at this point, go to login screen
 //        if(loggedInUserId == -1){
@@ -87,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
 //        }
         updateSharedPreference();
 
-        binding.logButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                getInformationFromDisplay();
-                insertGymLogRecord();
-            }
-        });
+//        binding.logButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                getInformationFromDisplay();
+//                insertGymLogRecord();
+//            }
+//        });
 
         binding.mainBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,18 +212,18 @@ public class MainActivity extends AppCompatActivity {
 //        repository.insertParkingLog(log);
 //    }
 
-    @Deprecated
-    private void updateDisplay(){
-        ArrayList<ParkingGarage> allLogs = repository.getAllLogsByUserId(loggedInUserId);
-        if(allLogs.isEmpty()){
-//            binding.logDisplayTextView.setText(R.string.nothing_to_show_time_to_hit_the_gym);
-        }
-        StringBuilder sb = new StringBuilder();
-        for(ParkingGarage log : allLogs){
-            sb.append(log);
-        }
-//        binding.logDisplayTextView.setText(sb.toString());
-    }
+//    @Deprecated
+//    private void updateDisplay(){
+//        ArrayList<ParkingGarage> allLogs = repository.getAllLogsByUserId(loggedInUserId);
+//        if(allLogs.isEmpty()){
+////            binding.logDisplayTextView.setText(R.string.nothing_to_show_time_to_hit_the_gym);
+//        }
+//        StringBuilder sb = new StringBuilder();
+//        for(ParkingGarage log : allLogs){
+//            sb.append(log);
+//        }
+////        binding.logDisplayTextView.setText(sb.toString());
+//    }
 
 //    private void getInformationFromDisplay(){
 //        mExercise = binding.exerciseInputEditText.getText().toString();

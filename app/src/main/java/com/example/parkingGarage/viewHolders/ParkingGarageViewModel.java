@@ -19,9 +19,9 @@ public class ParkingGarageViewModel extends AndroidViewModel {
         repository = ParkingGarageRepository.getRepository(application);
     }
 
-    public LiveData<List<ParkingGarage>> getAllLogsById(int userId) {
-        return repository.getAllLogsByUserIdLiveData(userId);
-    }
+//    public LiveData<List<ParkingGarage>> getAllLogsById(int userId) {
+//        return repository.getAllLogsByUserIdLiveData(userId);
+//    }
 //commented out
 //    @Deprecated
 //    public void insert(ParkingGarage log){

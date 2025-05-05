@@ -36,9 +36,9 @@ public class MenuActivity extends AppCompatActivity {
     private ParkingGarageViewModel parkingGarageViewModel;
 
     public static final String TAG = "DAC_GYMLOG";
-    String mExercise = "";
-    double mWeight = 0.0;
-    int mReps = 0;
+//    String mExercise = "";
+//    double mWeight = 0.0;
+//    int mReps = 0;
 
     private int loggedInUserId = -1;
     private User user;
