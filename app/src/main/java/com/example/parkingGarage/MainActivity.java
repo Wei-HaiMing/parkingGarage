@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void loginUser(Bundle savedInstanceState) {
         //check shared preference for logged in user
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key),

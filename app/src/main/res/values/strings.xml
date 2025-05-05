@@ -38,4 +38,6 @@
     <string name="update_price">Update Price</string>
     <string name="day_price">Day Price</string>
     <string name="adjust_pricing">Adjust Pricing</string>
+    <string name="parking_lots">Parking Lots:</string>
+    <string name="lot">Lot:</string>
 </resources>
