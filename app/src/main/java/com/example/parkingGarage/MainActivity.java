@@ -36,14 +36,12 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private ActivityMainBinding binding;
     private ParkingGarageRepository repository;
-
     private ParkingGarageViewModel parkingGarageViewModel;
-
     public static final String TAG = "DAC_GYMLOG";
-    String mExercise = "";
-    double mWeight = 0.0;
-    int mReps = 0;
 
+    String parkingGarageName;
+    private int garageId;
+    private int parkinggarageuserId;
     private int loggedInUserId = -1;
     private User user;
 
@@ -65,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
         repository = ParkingGarageRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
-            adapter.submitList(gymLogs);
-        });
+//        parkingGarageViewModel.getAllLogsById(loggedInUserId).observe(this, gymLogs -> {
+//            adapter.submitList(gymLogs);
+//        });
 
         // User is not logged in at this point, go to login screen
 //        if(loggedInUserId == -1){
@@ -85,21 +83,15 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            });
 //        }
-
-
-
         updateSharedPreference();
 
-
-
-
-        binding.logButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                getInformationFromDisplay();
-                insertGymLogRecord();
-            }
-        });
+//        binding.logButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                getInformationFromDisplay();
+//                insertGymLogRecord();
+//            }
+//        });
 
         binding.mainBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,39 +202,39 @@ public class MainActivity extends AppCompatActivity {
         return new Intent(context, MainActivity.class);
     }
 
-    private void insertGymLogRecord(){
-        if(mExercise.isEmpty()){
-            return;
-        }
-        ParkingGarage log = new ParkingGarage(mExercise, mWeight, mReps, loggedInUserId);
-        repository.insertParkingLog(log);
-    }
+//    private void insertGymLogRecord(){
+//        if(mExercise.isEmpty()){
+//            return;
+//        }
+//        ParkingGarage log = new ParkingGarage();
+//        repository.insertParkingLog(log);
+//    }
 
-    @Deprecated
-    private void updateDisplay(){
-        ArrayList<ParkingGarage> allLogs = repository.getAllLogsByUserId(loggedInUserId);
-        if(allLogs.isEmpty()){
-//            binding.logDisplayTextView.setText(R.string.nothing_to_show_time_to_hit_the_gym);
-        }
-        StringBuilder sb = new StringBuilder();
-        for(ParkingGarage log : allLogs){
-            sb.append(log);
-        }
-//        binding.logDisplayTextView.setText(sb.toString());
-    }
+//    @Deprecated
+//    private void updateDisplay(){
+//        ArrayList<ParkingGarage> allLogs = repository.getAllLogsByUserId(loggedInUserId);
+//        if(allLogs.isEmpty()){
+////            binding.logDisplayTextView.setText(R.string.nothing_to_show_time_to_hit_the_gym);
+//        }
+//        StringBuilder sb = new StringBuilder();
+//        for(ParkingGarage log : allLogs){
+//            sb.append(log);
+//        }
+////        binding.logDisplayTextView.setText(sb.toString());
+//    }
 
-    private void getInformationFromDisplay(){
-        mExercise = binding.exerciseInputEditText.getText().toString();
-        try {
-            mWeight = Double.parseDouble(binding.weightInputEditText.getText().toString());
-        }catch(NumberFormatException e){
-            Log.d(TAG, "Error reading value from Weight edit text.");
-        }
-
-        try {
-            mReps = Integer.parseInt(binding.repInputEditText.getText().toString());
-        }catch(NumberFormatException e){
-            Log.d(TAG, "Error reading value from reps edit text.");
-        }
-    }
+//    private void getInformationFromDisplay(){
+//        mExercise = binding.exerciseInputEditText.getText().toString();
+//        try {
+//            mWeight = Double.parseDouble(binding.weightInputEditText.getText().toString());
+//        }catch(NumberFormatException e){
+//            Log.d(TAG, "Error reading value from Weight edit text.");
+//        }
+//
+//        try {
+//            mReps = Integer.parseInt(binding.repInputEditText.getText().toString());
+//        }catch(NumberFormatException e){
+//            Log.d(TAG, "Error reading value from reps edit text.");
+//        }
+//    }
 }

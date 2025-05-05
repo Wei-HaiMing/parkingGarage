@@ -36,9 +36,9 @@ public class MenuActivity extends AppCompatActivity {
     private ParkingGarageViewModel parkingGarageViewModel;
 
     public static final String TAG = "DAC_GYMLOG";
-    String mExercise = "";
-    double mWeight = 0.0;
-    int mReps = 0;
+//    String mExercise = "";
+//    double mWeight = 0.0;
+//    int mReps = 0;
 
     private int loggedInUserId = -1;
     private User user;
@@ -70,6 +70,7 @@ public class MenuActivity extends AppCompatActivity {
             Intent intent = LandingActivity.landingActivityIntentFactory(getApplicationContext());
             startActivity(intent);
         }
+
         else{
             LiveData<Boolean> userObserver = repository.getAdminStatus(loggedInUserId);
             userObserver.observe(this, adminStatus -> {
@@ -87,11 +88,10 @@ public class MenuActivity extends AppCompatActivity {
         binding.parkingGarageSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext()));
+                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
-
-
 
     }
 
@@ -187,7 +187,6 @@ public class MenuActivity extends AppCompatActivity {
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
         sharedPrefEditor.apply();
-
     }
 
     static Intent menuActivityIntentFactory(Context context, int userId){
