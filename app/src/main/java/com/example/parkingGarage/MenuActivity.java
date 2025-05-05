@@ -70,6 +70,7 @@ public class MenuActivity extends AppCompatActivity {
             Intent intent = LandingActivity.landingActivityIntentFactory(getApplicationContext());
             startActivity(intent);
         }
+
         else{
             LiveData<Boolean> userObserver = repository.getAdminStatus(loggedInUserId);
             userObserver.observe(this, adminStatus -> {
@@ -87,11 +88,10 @@ public class MenuActivity extends AppCompatActivity {
         binding.parkingGarageSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext()));
+                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
-
-
 
     }
 

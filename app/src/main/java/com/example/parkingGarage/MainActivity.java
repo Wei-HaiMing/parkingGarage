@@ -36,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private ActivityMainBinding binding;
     private ParkingGarageRepository repository;
-
     private ParkingGarageViewModel parkingGarageViewModel;
-
     public static final String TAG = "DAC_GYMLOG";
 
     String parkingGarageName;
