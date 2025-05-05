@@ -1,5 +1,7 @@
 package com.example.parkingGarage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -20,5 +22,8 @@ public class CurrentSpaceActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+    static Intent currentSpaceFactory(Context context){
+        return new Intent(context, CurrentSpaceActivity.class);
     }
 }

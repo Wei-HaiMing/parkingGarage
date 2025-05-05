@@ -10,20 +10,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class QuickFindActivity extends AppCompatActivity {
+public class AdjustPricingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_quick_find);
+        setContentView(R.layout.activity_adjust_pricing);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
     }
-    static Intent quickFindFactory(Context context){
-        return new Intent(context, QuickFindActivity.class);
+
+    static Intent adjustPriceIntentFactory(Context context){
+        return new Intent(context, AdjustPricingActivity.class);
     }
 }

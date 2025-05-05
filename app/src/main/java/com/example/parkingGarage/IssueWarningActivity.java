@@ -1,5 +1,7 @@
-package com.example.parkingGarage.viewHolders;
+package com.example.parkingGarage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -7,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.example.parkingGarage.R;
 
 public class IssueWarningActivity extends AppCompatActivity {
 
@@ -22,5 +22,8 @@ public class IssueWarningActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+    static Intent issueWarningFactory(Context context){
+        return new Intent(context, IssueWarningActivity.class);
     }
 }
