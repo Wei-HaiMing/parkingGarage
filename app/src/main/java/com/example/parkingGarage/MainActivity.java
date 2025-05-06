@@ -130,17 +130,19 @@ public class MainActivity extends AppCompatActivity {
                         }
                         Toast.makeText(MainActivity.this, "Space was empty", Toast.LENGTH_SHORT).show();
                     }else{
+
                         try {
                             floorSearch.add(repository.getFloorById(floorNum).getValue());
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             Toast.makeText(MainActivity.this, "Error Reading Floor Number " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         try {
                             spaceSearch.add(repository.getSpaceById(spaceNum).getValue());
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             Toast.makeText(MainActivity.this, "Error Reading Space Number " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         Toast.makeText(MainActivity.this, "Found Space since space was entered", Toast.LENGTH_SHORT).show();
+                        parkingGarageViewModel
                     }
 
                 }else{
