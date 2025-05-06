@@ -36,7 +36,7 @@
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
         android:hint="@string/enter_an_exercise"
-        android:inputType="textAutoComplete"
+        android:inputType="number|numberDecimal"
         android:padding="8dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/exerciseLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/exerciseLabelTextView" />

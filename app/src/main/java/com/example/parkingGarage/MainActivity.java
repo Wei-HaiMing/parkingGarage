@@ -122,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         Toast.makeText(MainActivity.this, "Floor and Space were empty", Toast.LENGTH_SHORT).show();
+                        printFloors(floorSearch);
+                        printSpaces(spaceSearch);
                     }else if(spaceNum == -1){ // search everything in floor
                         floorSearch.add(repository.getFloorById(floorNum).getValue());
                         for(int i = 0; i < allSpaces.size(); i++){
@@ -130,6 +132,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         Toast.makeText(MainActivity.this, "Space was empty", Toast.LENGTH_SHORT).show();
+                        printFloors(floorSearch);
+                        printSpaces(spaceSearch);
                     }else{
 
                         try {
@@ -142,11 +146,14 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Toast.makeText(MainActivity.this, "Error Reading Space Number " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(MainActivity.this, "Found Space since space was entered", Toast.LENGTH_SHORT).show();
-                        repository.getSpaceByFloorIdLiveData(spaceSearch.get(0).getFloorId()).observe(this, spaces -> {
-                            adapter.submitList(spaces);
-                        });
-
+//                        Toast.makeText(MainActivity.this, "Found Space since space was entered", Toast.LENGTH_SHORT).show();
+                        if(spaceSearch.get(0).isOccupied()){
+                            Toast.makeText(MainActivity.this, "Spot Taken", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Reserved", Toast.LENGTH_SHORT).show();
+                        }
+                        printFloors(floorSearch);
+                        printSpaces(spaceSearch);
                     }
 
                 }else{
@@ -165,17 +172,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void getInformationFromDisplay(){
-        garageId = Integer.parseInt(binding.weightInputEditText.getText().toString());
+        try {
+            garageId = Integer.parseInt(binding.exerciseInputEditText.getText().toString());
+        }catch(Exception e){
+            Log.d(TAG, "Error reading value from garage number edit text.");
+            garageId = -1;
+        }
         try {
             floorNum = Integer.parseInt(binding.weightInputEditText.getText().toString());
         }catch(NumberFormatException e){
             Log.d(TAG, "Error reading value from floor number edit text.");
+            floorNum = -1;
         }
 
         try {
             spaceNum = Integer.parseInt(binding.repInputEditText.getText().toString());
         }catch(NumberFormatException e){
             Log.d(TAG, "Error reading value from space number edit text.");
+            spaceNum = -1;
+        }
+    }
+
+    public void printFloors(ArrayList<ParkingFloor> floors){
+        for(int i = 0; i < floors.size(); i++){
+            System.out.println(floors.get(i));
+        }
+    }
+
+    public void printSpaces(ArrayList<ParkingSpace> spaces){
+        for(int i = 0; i < spaces.size(); i++){
+            System.out.println(spaces.get(i));
         }
     }
 

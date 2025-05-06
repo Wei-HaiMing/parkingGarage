@@ -23,7 +23,8 @@ public class ParkingSpace{
 
     @Override
     public String toString() {
-        return "spaceId=" + spaceId;
+        return "Parking Space{" +
+                "spaceId=" + spaceId;
     }
 
     @Override
