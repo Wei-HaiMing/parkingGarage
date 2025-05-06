@@ -29,12 +29,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         repository = ParkingGarageRepository.getRepository(getApplication());
 
-
-
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 verifyUser();
             }
         });
@@ -94,4 +91,5 @@ public class SignUpActivity extends AppCompatActivity {
     static Intent signUpIntentFactory(Context context){
         return new Intent(context, SignUpActivity.class);
     }
+
 }

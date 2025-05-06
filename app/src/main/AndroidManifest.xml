@@ -13,6 +13,27 @@
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".AdjustPricingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IssueWarningActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuickFindActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelectSpaceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ParkingLotsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CurrentSpaceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OptionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
@@ -23,12 +44,13 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
