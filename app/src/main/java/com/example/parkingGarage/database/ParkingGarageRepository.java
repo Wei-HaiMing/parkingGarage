@@ -1,9 +1,12 @@
 package com.example.parkingGarage.database;
 
+import static com.example.parkingGarage.database.ParkingGarageDatabase.databaseWriteExecutor;
+
 import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Database;
 
 import com.example.parkingGarage.database.entities.ParkingFloor;
 import com.example.parkingGarage.database.entities.ParkingGarage;
@@ -43,7 +46,7 @@ public class ParkingGarageRepository {
         if(repository != null){
             return repository;
         }
-        Future<ParkingGarageRepository> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+        Future<ParkingGarageRepository> future = databaseWriteExecutor.submit(
                 new Callable<ParkingGarageRepository>() {
                     @Override
                     public ParkingGarageRepository call() throws Exception {
@@ -59,8 +62,9 @@ public class ParkingGarageRepository {
         return null;
     }
 
+
     public ArrayList<ParkingGarage> getAllLogs(){
-        Future<ArrayList<ParkingGarage>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+        Future<ArrayList<ParkingGarage>> future = databaseWriteExecutor.submit(
                 new Callable<ArrayList<ParkingGarage>>() {
                     @Override
                     public ArrayList<ParkingGarage> call() throws Exception {
@@ -76,7 +80,7 @@ public class ParkingGarageRepository {
         return null;
     }
     public ArrayList<ParkingFloor> getAllFloors(){
-        Future<ArrayList<ParkingFloor>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+        Future<ArrayList<ParkingFloor>> future = databaseWriteExecutor.submit(
                 new Callable<ArrayList<ParkingFloor>>() {
                     @Override
                     public ArrayList<ParkingFloor> call() throws Exception {
@@ -92,7 +96,7 @@ public class ParkingGarageRepository {
         return null;
     }
     public ArrayList<ParkingSpace> getAllSpaces(){
-        Future<ArrayList<ParkingSpace>> future = ParkingGarageDatabase.databaseWriteExecutor.submit(
+        Future<ArrayList<ParkingSpace>> future = databaseWriteExecutor.submit(
                 new Callable<ArrayList<ParkingSpace>>() {
                     @Override
                     public ArrayList<ParkingSpace> call() throws Exception {
@@ -109,14 +113,14 @@ public class ParkingGarageRepository {
     }
 
     public void insertParkingLog(ParkingGarage parkingGarage){
-        ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
+        databaseWriteExecutor.execute(() ->
         {
             parkingGarageDAO.insert(parkingGarage);
         });
     }
 
     public void insertUser(User user){
-        ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
+        databaseWriteExecutor.execute(() ->
         {
             userDAO.insert(user);
         });
@@ -128,7 +132,7 @@ public class ParkingGarageRepository {
 
     @Deprecated
     public void insertUser(User... user){
-        ParkingGarageDatabase.databaseWriteExecutor.execute(() ->
+        databaseWriteExecutor.execute(() ->
         {
             userDAO.insert(user);
         });

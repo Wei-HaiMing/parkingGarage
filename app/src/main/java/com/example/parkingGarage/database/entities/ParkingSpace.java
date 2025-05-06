@@ -18,7 +18,6 @@ public class ParkingSpace{
     public ParkingSpace(int spaceNum, boolean occupied, int floorId) {
         this.spaceNum = spaceNum;
         this.occupied = occupied;
-        this.spaceId = spaceId;
         this.floorId = floorId;
     }
 

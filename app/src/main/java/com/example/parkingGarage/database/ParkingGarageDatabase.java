@@ -58,6 +58,8 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!"); //TODO: need to add separate route to get proper ids off garage and floors, add query to daos to retrieve id
+
+            ParkingGarage garage1 = new ParkingGarage("Salinas Parking Garage");
             databaseWriteExecutor.execute(() -> {
                 UserDAO dao = INSTANCE.userDAO();
                 dao.deleteAll();
@@ -68,21 +70,29 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
                 dao.insert(testUser1);
 
                 ParkingGarageDAO pgdao = INSTANCE.parkingGarageDAO();
-                ParkingFloorDAO pfdao = INSTANCE.parkingFloorDAO();
-                ParkingSpaceDAO psdao = INSTANCE.parkingSpaceDAO();
                 pgdao.deleteAll();
-                pfdao.deleteAll();
-                psdao.deleteAll();
 
-                ParkingGarage garage1 = new ParkingGarage("Salinas Parking Garage");
                 pgdao.insert(garage1);
 
-                ParkingFloor pg1f1 = new ParkingFloor(10, 1, 10, garage1.getGarageId());
-                ParkingFloor pg1f2 = new ParkingFloor(10, 2, 10, garage1.getGarageId());
-                ParkingFloor pg1f3 = new ParkingFloor(10, 3, 10, garage1.getGarageId());
+
+
+
+
+            });
+            ParkingFloor pg1f1 = new ParkingFloor(10, 1, 10, garage1.getGarageId());
+            ParkingFloor pg1f2 = new ParkingFloor(10, 2, 10, garage1.getGarageId());
+            ParkingFloor pg1f3 = new ParkingFloor(10, 3, 10, garage1.getGarageId());
+            databaseWriteExecutor.execute(() -> {
+                ParkingFloorDAO pfdao = INSTANCE.parkingFloorDAO();
+                pfdao.deleteAll();
+
                 pfdao.insert(pg1f1);
                 pfdao.insert(pg1f2);
                 pfdao.insert(pg1f3);
+            });
+            databaseWriteExecutor.execute(() -> {
+                ParkingSpaceDAO psdao = INSTANCE.parkingSpaceDAO();
+                psdao.deleteAll();
 
                 for(int j = 0; j < 10; j++){
                     ParkingSpace psgen = new ParkingSpace(j + 1, false, pg1f1.getFloorId());

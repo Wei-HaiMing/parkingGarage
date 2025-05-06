@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface ParkingGarageDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(ParkingGarage parkingLog);
+    long insert(ParkingGarage parkingLog);
 
     @Query("DELETE FROM " + ParkingGarageDatabase.PARKING_GARAGE_TABLE) void deleteAll();
 
