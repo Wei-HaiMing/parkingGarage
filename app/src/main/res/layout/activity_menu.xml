@@ -7,32 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <TextView
-        android:id="@+id/menuTextView"
+    <Button
+        android:id="@+id/quickFindButton"
         android:layout_width="190dp"
-        android:layout_height="77dp"
-        android:text="@string/welcome_user"
-        android:gravity="center"
-        android:textSize="30sp"
+        android:layout_height="50dp"
+        android:layout_marginTop="144dp"
+        android:text="@string/quick_find"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/quickFindButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/quick_find"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menuTextView" />
-
-    <Button
         android:id="@+id/parkingGarageSearchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:text="@string/parking_garages"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,19 +30,20 @@
 
     <Button
         android:id="@+id/viewCurrentSpaceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:text="@string/view_current_space"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/parkingGarageSearchButton" />
 
     <Button
         android:id="@+id/optionsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:text="@string/options"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -61,15 +52,15 @@
 
     <Button
         android:id="@+id/adminAreaButton"
-        android:layout_width="187dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:text="@string/admin_area"
         android:visibility="invisible"
-        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optionsButton" />
+        app:layout_constraintTop_toBottomOf="@+id/optionsButton"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
