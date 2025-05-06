@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         repository = ParkingGarageRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
+
 //        parkingGarageViewModel.getAllFloorsById(loggedInUserId).observe(this, gymLogs -> {
 //            adapter.submitList(gymLogs);
 //        });
@@ -142,7 +143,10 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Error Reading Space Number " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         Toast.makeText(MainActivity.this, "Found Space since space was entered", Toast.LENGTH_SHORT).show();
-                        parkingGarageViewModel
+                        repository.getSpaceByFloorIdLiveData(spaceSearch.get(0).getFloorId()).observe(this, spaces -> {
+                            adapter.submitList(spaces);
+                        });
+
                     }
 
                 }else{

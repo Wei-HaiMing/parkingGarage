@@ -15,6 +15,7 @@ import com.example.parkingGarage.database.entities.ParkingSpace;
 import com.example.parkingGarage.database.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -94,6 +95,10 @@ public class ParkingGarageRepository {
             Log.i(MainActivity.TAG, "Problem when getting all ParkingFloors in the repository");
         }
         return null;
+    }
+
+    public LiveData<List<ParkingSpace>> getSpaceByFloorIdLiveData(int floorId){
+        return parkingSpaceDAO.getSpaceByIdLiveData(floorId);
     }
     public ArrayList<ParkingSpace> getAllSpaces(){
         Future<ArrayList<ParkingSpace>> future = databaseWriteExecutor.submit(

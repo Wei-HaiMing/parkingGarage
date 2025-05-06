@@ -24,6 +24,9 @@ public interface ParkingSpaceDAO {
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_SPACE_TABLE + " WHERE spaceId == :spaceId")
     LiveData<ParkingSpace> getSpaceById(int spaceId);
 
+    @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_SPACE_TABLE + " WHERE spaceId == :spaceId")
+    LiveData<List<ParkingSpace>> getSpaceByIdLiveData(int spaceId);
+
     @Query("SELECT * FROM " + ParkingGarageDatabase.PARKING_FLOOR_TABLE + " WHERE floorId == :floorId")
     LiveData<ParkingFloor> getFloorBySpaceFloorId(int floorId);
 
