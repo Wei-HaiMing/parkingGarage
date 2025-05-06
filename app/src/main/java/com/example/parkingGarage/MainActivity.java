@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         printSpaces(spaceSearch);
                     }
 
+
                 }else{
                     Toast.makeText(MainActivity.this, "You must enter a Garage Name", Toast.LENGTH_SHORT).show();
                 }
