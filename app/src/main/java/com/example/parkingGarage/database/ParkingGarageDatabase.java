@@ -82,6 +82,11 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
             ParkingFloor pg1f1 = new ParkingFloor(10, 1, 10, garage1.getGarageId());
             ParkingFloor pg1f2 = new ParkingFloor(10, 2, 10, garage1.getGarageId());
             ParkingFloor pg1f3 = new ParkingFloor(10, 3, 10, garage1.getGarageId());
+
+            pg1f1.setFloorId(1);
+            pg1f2.setFloorId(2);
+            pg1f3.setFloorId(3);
+
             databaseWriteExecutor.execute(() -> {
                 ParkingFloorDAO pfdao = INSTANCE.parkingFloorDAO();
                 pfdao.deleteAll();
@@ -103,7 +108,7 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
                     psdao.insert(psgen);
                 }
                 for(int j = 0; j < 10; j++){
-                    ParkingSpace psgen = new ParkingSpace(j + 1, false, pg1f2.getFloorId());
+                    ParkingSpace psgen = new ParkingSpace(j + 1, false, pg1f3.getFloorId());
                     psdao.insert(psgen);
                 }
             });
