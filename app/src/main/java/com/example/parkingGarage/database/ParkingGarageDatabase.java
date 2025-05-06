@@ -10,8 +10,10 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.parkingGarage.database.entities.ParkingFloor;
 import com.example.parkingGarage.database.entities.ParkingGarage;
 import com.example.parkingGarage.MainActivity;
+import com.example.parkingGarage.database.entities.ParkingSpace;
 import com.example.parkingGarage.database.entities.User;
 import com.example.parkingGarage.database.typeConverters.LocalDateTypeConverter;
 
@@ -19,12 +21,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {ParkingGarage.class, User.class}, version = 4, exportSchema = false)
+@Database(entities = {ParkingGarage.class, User.class, ParkingFloor.class, ParkingSpace.class}, version = 5, exportSchema = false)
 public abstract class ParkingGarageDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "ParkingGarageDatabase";
-    public static final String PARKING_LOG_TABLE = "parkingLogTable";
+    public static final String PARKING_GARAGE_TABLE = "parkingGarageTable";
+
+    public static final String PARKING_FLOOR_TABLE = "parkingFloorTable";
+
+    public static final String PARKING_SPACE_TABLE = "parkingSpaceTable";
 
     private static volatile ParkingGarageDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -51,7 +57,9 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
-            Log.i(MainActivity.TAG, "DATABASE CREATED!");
+            Log.i(MainActivity.TAG, "DATABASE CREATED!"); //TODO: need to add separate route to get proper ids off garage and floors, add query to daos to retrieve id
+
+            ParkingGarage garage1 = new ParkingGarage("Salinas Parking Garage");
             databaseWriteExecutor.execute(() -> {
                 UserDAO dao = INSTANCE.userDAO();
                 dao.deleteAll();
@@ -60,11 +68,58 @@ public abstract class ParkingGarageDatabase extends RoomDatabase {
                 dao.insert(admin);
                 User testUser1 = new User("testUser1", "testUser1", "user1@users.com");
                 dao.insert(testUser1);
+
+                ParkingGarageDAO pgdao = INSTANCE.parkingGarageDAO();
+                pgdao.deleteAll();
+
+                pgdao.insert(garage1);
+
+
+
+
+
+            });
+            ParkingFloor pg1f1 = new ParkingFloor(10, 1, 10, garage1.getGarageId());
+            ParkingFloor pg1f2 = new ParkingFloor(10, 2, 10, garage1.getGarageId());
+            ParkingFloor pg1f3 = new ParkingFloor(10, 3, 10, garage1.getGarageId());
+
+            pg1f1.setFloorId(1);
+            pg1f2.setFloorId(2);
+            pg1f3.setFloorId(3);
+
+            databaseWriteExecutor.execute(() -> {
+                ParkingFloorDAO pfdao = INSTANCE.parkingFloorDAO();
+                pfdao.deleteAll();
+
+                pfdao.insert(pg1f1);
+                pfdao.insert(pg1f2);
+                pfdao.insert(pg1f3);
+            });
+            databaseWriteExecutor.execute(() -> {
+                ParkingSpaceDAO psdao = INSTANCE.parkingSpaceDAO();
+                psdao.deleteAll();
+
+                for(int j = 0; j < 10; j++){
+                    ParkingSpace psgen = new ParkingSpace(j + 1, false, pg1f1.getFloorId());
+                    psdao.insert(psgen);
+                }
+                for(int j = 0; j < 10; j++){
+                    ParkingSpace psgen = new ParkingSpace(j + 1, false, pg1f2.getFloorId());
+                    psdao.insert(psgen);
+                }
+                for(int j = 0; j < 10; j++){
+                    ParkingSpace psgen = new ParkingSpace(j + 1, false, pg1f3.getFloorId());
+                    psdao.insert(psgen);
+                }
             });
         }
     };
 
-    public abstract ParkingGarageDAO parkingLotDAO();
+    public abstract ParkingGarageDAO parkingGarageDAO();
 
     public abstract UserDAO userDAO();
+
+    public abstract ParkingFloorDAO parkingFloorDAO();
+
+    public abstract ParkingSpaceDAO parkingSpaceDAO();
 }

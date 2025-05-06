@@ -14,6 +14,7 @@ public class User {
     private String username;
     private String password;
 
+    private int occupiedSpaceId;
     private String email;
     private boolean isAdmin;
 
@@ -22,6 +23,23 @@ public class User {
         this.password = password;
         this.email = email;
         isAdmin = false;
+        occupiedSpaceId = -1;
+    }
+
+    public int getOccupiedSpaceId() {
+        return occupiedSpaceId;
+    }
+
+    public void setOccupiedSpaceId(int occupiedSpaceId) {
+        this.occupiedSpaceId = occupiedSpaceId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -29,12 +47,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && isAdmin == user.isAdmin && Objects.equals(username, user.username) && Objects.equals(password, user.password);
+        return id == user.id && occupiedSpaceId == user.occupiedSpaceId && isAdmin == user.isAdmin && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, isAdmin);
+        return Objects.hash(id, username, password, occupiedSpaceId, email, isAdmin);
     }
 
     public int getId() {
@@ -69,11 +87,7 @@ public class User {
         isAdmin = admin;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
+
 }

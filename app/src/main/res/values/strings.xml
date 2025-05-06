@@ -21,6 +21,9 @@
     <string name="options">Options</string>
     <string name="admin_area">Admin Area</string>
     <string name="back">Back</string>
+
+    <string name="search">Search!</string>
+
     <string name="closest_lot">Closest Lot</string>
     <string name="space_suggested">Space Suggested</string>
     <string name="back_to_welcome_user">Back to Welcome User</string>
@@ -43,4 +46,5 @@
     <string name="current_space">Current Space</string>
     <string name="currentSpaceBack">Back</string>
     <string name="OptionsBack">BACK</string>
+
 </resources>

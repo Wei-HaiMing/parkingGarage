@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import com.example.parkingGarage.database.entities.ParkingGarage;
+import com.example.parkingGarage.database.entities.ParkingSpace;
 
-public class ParkingGarageAdapter extends ListAdapter<ParkingGarage, ParkingGarageViewHolder> {
-    public ParkingGarageAdapter(@NonNull DiffUtil.ItemCallback<ParkingGarage> diffCallBack){
+public class ParkingGarageAdapter extends ListAdapter<ParkingSpace, ParkingGarageViewHolder> {
+    public ParkingGarageAdapter(@NonNull DiffUtil.ItemCallback<ParkingSpace> diffCallBack){
         super(diffCallBack);
     }
 
@@ -21,18 +22,18 @@ public class ParkingGarageAdapter extends ListAdapter<ParkingGarage, ParkingGara
 
     @Override
     public void onBindViewHolder(@NonNull ParkingGarageViewHolder holder, int position) {
-        ParkingGarage current = getItem(position);
+        ParkingSpace current = getItem(position);
         holder.bind(current.toString());
     }
 
-    public static class ParkingGarageDiff extends DiffUtil.ItemCallback<ParkingGarage>{
+    public static class ParkingGarageDiff extends DiffUtil.ItemCallback<ParkingSpace>{
         @Override
-        public boolean areItemsTheSame(@NonNull ParkingGarage oldItem, @NonNull ParkingGarage newItem) {
+        public boolean areItemsTheSame(@NonNull ParkingSpace oldItem, @NonNull ParkingSpace newItem) {
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull ParkingGarage oldItem, @NonNull ParkingGarage newItem) {
+        public boolean areContentsTheSame(@NonNull ParkingSpace oldItem, @NonNull ParkingSpace newItem) {
             return oldItem.equals(newItem);
         }
     }

@@ -5,18 +5,16 @@ import androidx.room.PrimaryKey;
 
 import com.example.parkingGarage.database.ParkingGarageDatabase;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity(tableName = ParkingGarageDatabase.PARKING_LOG_TABLE)
+@Entity(tableName = ParkingGarageDatabase.PARKING_GARAGE_TABLE)
 public class ParkingGarage {
     @PrimaryKey(autoGenerate = true)
     private int garageId;
     private String name;
 
-    public ParkingGarage(String name, int garageId) {
+    public ParkingGarage(String name) {
         this.name = name;
-        this.garageId = garageId;
     }
 
     @Override

@@ -1,20 +1,34 @@
 package com.example.parkingGarage.database.entities;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.example.parkingGarage.database.ParkingGarageDatabase;
+
 import java.util.Objects;
 
+@Entity(tableName = ParkingGarageDatabase.PARKING_FLOOR_TABLE)
 public class ParkingFloor {
+
+    @PrimaryKey(autoGenerate = true)
+    private int floorId;
     private int spaceCount;
     private int floorNum;
     private int spacesAvailable;
-    private int floorId;
+
     private int garageId;
 
-    public ParkingFloor(int spaceCount, int floorNum, int spacesAvailable, int floorId, int garageId) {
+    public ParkingFloor(int spaceCount, int floorNum, int spacesAvailable, int garageId) {
         this.spaceCount = spaceCount;
         this.floorNum = floorNum;
         this.spacesAvailable = spacesAvailable;
-        this.floorId = floorId;
         this.garageId = garageId;
+    }
+
+    @Override
+    public String toString() {
+        return "ParkingFloor{" +
+                "floorId=" + floorId;
     }
 
     @Override
