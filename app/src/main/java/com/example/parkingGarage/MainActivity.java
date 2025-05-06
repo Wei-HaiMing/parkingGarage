@@ -145,12 +145,8 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Toast.makeText(MainActivity.this, "Error Reading Space Number " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-//                        Toast.makeText(MainActivity.this, "Found Space since space was entered", Toast.LENGTH_SHORT).show();
-                        if(spaceSearch.get(0).isOccupied()){
-                            Toast.makeText(MainActivity.this, "Spot Taken", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(MainActivity.this, "Reserved", Toast.LENGTH_SHORT).show();
-                        }
+                        Toast.makeText(MainActivity.this, "Found Space since space was entered", Toast.LENGTH_SHORT).show();
+
                         printFloors(floorSearch);
                         printSpaces(spaceSearch);
                     }
