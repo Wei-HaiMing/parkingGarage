@@ -57,14 +57,10 @@ public class ExampleUnitTest {
 
         garage1.setName("Some Garage");
         assertEquals("Some Garage", garage1.getName());
+
+        ParkingGarage garage2 = new ParkingGarage("Some Garage");
+
+        assertEquals(garage1, garage2);
     }
     // Garage END
-
-    // Floor START
-
-    // Floor END
-
-    // Space START
-
-    // Space END
 }
