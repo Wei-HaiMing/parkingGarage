@@ -14,7 +14,6 @@ public class ParkingFloorTest {
         assertNotEquals(floor1, floor2);
     }
 
-
     @Test
     public void getAndSet(){
             ParkingFloor floor = new ParkingFloor(100, 2,75,10,5);
