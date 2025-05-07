@@ -8,15 +8,15 @@ public class ParkingFloorTest {
 
     @Test
     public void testEquals(){
-        ParkingFloor floor1 = new ParkingFloor(1,20,15,10,5);
-        ParkingFloor floor2 = new ParkingFloor(1,12,30,11,5);
+        ParkingFloor floor1 = new ParkingFloor(1,20,15,10);
+        ParkingFloor floor2 = new ParkingFloor(1,12,30,11);
         assertEquals(floor1, floor1);
         assertNotEquals(floor1, floor2);
     }
 
     @Test
     public void getAndSet(){
-            ParkingFloor floor = new ParkingFloor(100, 2,75,10,5);
+            ParkingFloor floor = new ParkingFloor(100, 2,75,10);
             //random numbers to initiate obj
 
             floor.setSpaceCount(101);
