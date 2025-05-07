@@ -25,11 +25,6 @@ public class ParkingFloor {
         return spaceCount == that.spaceCount && floorNum == that.floorNum && spacesAvailable == that.spacesAvailable && floorId == that.floorId && garageId == that.garageId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(spaceCount, floorNum, spacesAvailable, floorId, garageId);
-    }
-
     public int getSpaceCount() {
         return spaceCount;
     }
